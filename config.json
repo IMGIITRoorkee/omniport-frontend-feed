@@ -1,0 +1,8 @@
+{
+  "nomenclature": {
+    "name": "feed",
+    "verboseName": "Feed"
+  },
+  "baseUrl": "/feed",
+  "source": "feed/src/index"
+}
