@@ -1,0 +1,49 @@
+.feed-container{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+.feed-header{
+    display: flex;
+}
+.feed-user{
+    display: flex;
+    flex-grow: 1;
+}
+.feed-user-pic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1em;
+}
+.feed-user-desc{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.feed-user-name{
+    font-size: 1em;
+    font-weight: 700;
+    color: rgba(0,0,0,.87);
+}
+.feed-card-image-container{
+    text-align: left;
+}
+.feed-card-image{
+    object-fit: contain;
+    height: 10em;
+}
+.feed-card-description{
+    text-align: left;
+}
+.feed-app-container{
+    text-align: left;
+}
+.feed-app-container img{
+    width: 16px; 
+    height: 16px;
+    margin-right: 0.5em;
+}
+.feed-card-app-icon{
+    font-size: 16px
+}
