@@ -27,11 +27,13 @@ class App extends React.PureComponent {
     const creators = [
       {
         name: 'Dhruv Bhanushali',
-        role: 'Backend Developer'
+        role: 'Backend Developer',
+        link: 'https://dhruvkb.github.io/'
       },
       {
         name: 'Praduman Goyal',
-        role: 'Frontend Developer'
+        role: 'Frontend Developer',
+        link: 'https://pradumangoyal.github.io'
       }
     ]
     return (
