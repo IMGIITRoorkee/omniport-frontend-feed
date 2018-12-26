@@ -13,7 +13,7 @@ class FeedCard extends React.Component {
   render () {
     const { feed } = this.props
     return (
-      <Card fluid>
+      <Card fluid color={getTheme()}>
         <Card.Content>
           <div styleName='feed-header'>
             <div styleName='feed-user'>
