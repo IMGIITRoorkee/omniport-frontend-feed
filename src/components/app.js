@@ -7,7 +7,7 @@ import { Container } from 'semantic-ui-react'
 import Sidebar from 'core/common/src/components/primary-sidebar'
 import { AppHeader, AppFooter, AppMain } from 'formula_one'
 import { initialiseList, getMoreFeed } from '../actions'
-import AppContainer from './app-continer'
+import AppContainer from './app-container'
 
 import main from 'formula_one/src/css/app.css'
 

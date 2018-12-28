@@ -9,14 +9,6 @@ import FeedCard from './feed-card'
 import '../css/feed-card.css'
 
 class AppContainer extends React.Component {
-  state = {
-    number: 20
-  }
-  handleClick = () => {
-    this.setState({
-      number: this.state.number + 10
-    })
-  }
   render () {
     const { feedList } = this.props
     return (

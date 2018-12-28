@@ -4,7 +4,7 @@ import { Card, Image, Icon, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-import { getTheme, DisplayDP, appDetails } from 'formula_one'
+import { getTheme, DefaultDP, appDetails } from 'formula_one'
 import { changeReport } from '../actions'
 
 import '../css/feed-card.css'
@@ -21,7 +21,7 @@ class FeedCard extends React.Component {
                 {feed.person.displayPicture ? (
                   <Image src={feed.person.displayPicture} avatar />
                 ) : (
-                  <DisplayDP name={feed.person.shortName} />
+                  <DefaultDP name={feed.person.shortName} />
                 )}
               </div>
               <div styleName='feed-user-desc'>
