@@ -4,5 +4,9 @@
     "verboseName": "Feed"
   },
   "baseUrl": "/feed",
-  "source": "feed/src/index"
+  "source": "feed/src/index",
+  "primarySidebar": {
+    "icon": "newspaper",
+    "priority": 1
+  }
 }
