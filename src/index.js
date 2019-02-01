@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import { connect } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
 
 import { whoami } from 'services/auth/src/actions'
@@ -33,8 +33,13 @@ export default class AppRouter extends Component {
     const { match } = this.props
     return (
       <Provider store={this.store}>
-        <PRoute path={`${match.path}/`} component={App} />
-        {/* Default Route */}
+        <Switch>
+          <PRoute exact path={`${match.path}`} component={App} />
+          <Route
+            path={`${match.path}/:slug`}
+            render={props => <Redirect to="/404" />}
+          />
+        </Switch>
       </Provider>
     )
   }

@@ -38,7 +38,7 @@ class AppContainer extends React.Component {
         {feedList.isLoaded && !feedList.list.next && (
           <Segment basic textAlign='center'>
             <Icon name='frown outline' />
-            No more bits availaible. You have scrolled enough for today.
+            No more bits available. You have scrolled enough for today.
           </Segment>
         )}
       </div>
