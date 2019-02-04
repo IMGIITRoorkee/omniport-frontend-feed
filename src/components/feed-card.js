@@ -21,7 +21,7 @@ class FeedCard extends React.Component {
                 {feed.person.displayPicture ? (
                   <Image src={feed.person.displayPicture} avatar />
                 ) : (
-                  <DefaultDP name={feed.person.shortName} />
+                  <DefaultDP name={feed.person.fullName} />
                 )}
               </div>
               <div styleName='feed-user-desc'>
@@ -34,7 +34,10 @@ class FeedCard extends React.Component {
               </div>
             </div>
             <div>
-              <Dropdown icon='ellipsis vertical' pointing='top right'>
+              <Dropdown
+                icon={{ name: 'ellipsis vertical', color: 'grey' }}
+                pointing='top right'
+              >
                 <Dropdown.Menu>
                   <Dropdown.Item
                     onClick={() => {

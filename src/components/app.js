@@ -5,6 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 
 import Sidebar from 'core/common/src/components/primary-sidebar'
+import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
 import { AppHeader, AppFooter, AppMain } from 'formula_one'
 import { initialiseList, getMoreFeed } from '../actions'
 import AppContainer from './app-container'
@@ -45,8 +46,11 @@ class App extends React.PureComponent {
             <div styleName='main.app-main'>
               {isBrowser && <Sidebar />}
               <Scrollbars autoHide onScrollFrame={this.handleScroll}>
-                <Container textAlign='center'>
-                  <AppContainer />
+                <Container>
+                  <CustomBreadcrumb list={[{ name: 'Feed' }]} />
+                  <Container textAlign='center'>
+                    <AppContainer />
+                  </Container>
                 </Container>
               </Scrollbars>
             </div>
