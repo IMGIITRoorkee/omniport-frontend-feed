@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Loader, Icon } from 'semantic-ui-react'
+import { Segment, Icon } from 'semantic-ui-react'
 import { isBrowser } from 'react-device-detect'
 
 import { MasonryLayout, appDetails } from 'formula_one'
 import FeedCard from './feed-card'
 
 import '../css/feed-card.css'
+import EmptyFeedCard from './emty-feed-card'
 
 class AppContainer extends React.Component {
   render () {
@@ -31,9 +32,11 @@ class AppContainer extends React.Component {
           </MasonryLayout>
         )}
         {!feedList.isLoaded && (
-          <Segment basic>
-            <Loader active />
-          </Segment>
+          <MasonryLayout columns={isBrowser ? 2 : 1} gap={28}>
+            {[...Array(6)].map((item, index) => {
+              return <EmptyFeedCard key={index} image={index % 3 === 1} />
+            })}
+          </MasonryLayout>
         )}
         {feedList.isLoaded && !feedList.list.next && (
           <Segment basic textAlign='center'>

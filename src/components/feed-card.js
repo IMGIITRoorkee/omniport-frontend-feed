@@ -39,13 +39,15 @@ class FeedCard extends React.Component {
                 pointing='top right'
               >
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    onClick={() => {
-                      this.props.ChangeReport(feed.id, !feed.reported)
-                    }}
-                  >
-                    <Icon name={feed.reported ? 'circle outline' : 'ban'} />
-                    {feed.reported ? 'Unreport' : 'Report'}
+                  <Dropdown.Item>
+                    <span
+                      onClick={() => {
+                        this.props.ChangeReport(feed.id, !feed.reported)
+                      }}
+                    >
+                      <Icon name={feed.reported ? 'circle outline' : 'ban'} />
+                      {feed.reported ? 'Unreport' : 'Report'}
+                    </span>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

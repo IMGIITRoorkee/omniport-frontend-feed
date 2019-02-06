@@ -1,12 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { isMobile, isBrowser } from 'react-device-detect'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 
-import Sidebar from 'core/common/src/components/primary-sidebar'
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { AppHeader, AppFooter, AppMain } from 'formula_one'
 import { initialiseList, getMoreFeed } from '../actions'
 import AppContainer from './app-container'
 
@@ -25,39 +22,15 @@ class App extends React.PureComponent {
     }
   }
   render () {
-    const creators = [
-      {
-        name: 'Dhruv Bhanushali',
-        role: 'Backend developer',
-        link: 'https://dhruvkb.github.io/'
-      },
-      {
-        name: 'Praduman Goyal',
-        role: 'Frontend developer',
-        link: 'https://pradumangoyal.github.io'
-      }
-    ]
     return (
-      <React.Fragment>
-        <div styleName='app'>
-          <AppHeader userDropdown />
-          {isMobile && <Sidebar />}
-          <AppMain>
-            <div styleName='main.app-main'>
-              {isBrowser && <Sidebar />}
-              <Scrollbars autoHide onScrollFrame={this.handleScroll}>
-                <Container>
-                  <CustomBreadcrumb list={[{ name: 'Feed' }]} />
-                  <Container textAlign='center'>
-                    <AppContainer />
-                  </Container>
-                </Container>
-              </Scrollbars>
-            </div>
-          </AppMain>
-          <AppFooter creators={creators} />
-        </div>
-      </React.Fragment>
+      <Scrollbars autoHide onScrollFrame={this.handleScroll}>
+        <Container>
+          <CustomBreadcrumb list={[{ name: 'Feed' }]} />
+          <Container textAlign='center'>
+            <AppContainer />
+          </Container>
+        </Container>
+      </Scrollbars>
     )
   }
 }
