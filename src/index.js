@@ -34,7 +34,7 @@ export default class AppRouter extends Component {
     return (
       <Provider store={this.store}>
         <Switch>
-          <PRoute exact path={`${match.path}`} component={App} />
+          <PRoute exact path={`${match.path}`} component={App} guestAllowed={true}/>
           <Route
             path={`${match.path}/:slug`}
             render={props => <Redirect to="/404" />}
