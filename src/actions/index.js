@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-semantic-toasts'
 
 import { getCookie } from 'formula_one'
 import { urlFeedList, urlFeedBit } from '../urls'
@@ -20,7 +21,7 @@ export const initialiseList = () => {
           }
         })
       })
-      .catch(err => {
+      .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true
@@ -45,7 +46,7 @@ export const getMoreFeed = page => {
           }
         })
       })
-      .catch(err => {
+      .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true
@@ -66,6 +67,15 @@ export const changeReport = (id, status) => {
           payload: res.data
         })
       })
-      .catch(err => {})
+      .catch(() => {
+        toast({
+          type: 'error',
+          title: 'Error',
+          description: 'Some error occured while reporting',
+          animation: 'fade up',
+          icon: 'frown up',
+          time: 3000
+        })
+      })
   }
 }
