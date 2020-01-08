@@ -54,7 +54,11 @@ class FeedCard extends React.Component {
             </div>
           </div>
         </Card.Content>
-        <Card.Content>
+        <Card.Content
+          as={feed.url && Link}
+          to={feed.url}
+          styleName='feed-card-description-container'
+        >
           <div styleName='feed-card-description'>{feed.text}</div>
           {feed.image && (
             <div styleName='feed-card-image-container'>

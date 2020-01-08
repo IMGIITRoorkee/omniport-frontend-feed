@@ -33,6 +33,9 @@
     object-fit: contain;
     height: 10em;
 }
+.feed-card-description-container {
+    color: inherit;
+}
 .feed-card-description{
     text-align: left;
 }
