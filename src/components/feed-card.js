@@ -70,9 +70,7 @@ class FeedCard extends React.Component {
           <Link to={appDetails(feed.app.nomenclature.name).details.baseUrl}>
             {feed.app.assets && feed.app.assets.logo ? (
               <img
-                src={`/static/${feed.app.baseUrls.static}${
-                  feed.app.assets.favicon
-                }`}
+                src={`/static/${feed.app.baseUrls.static}${feed.app.assets.favicon}`}
                 alt={feed.app.nomenclature.name}
               />
             ) : (
@@ -97,7 +95,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(
-  null,
-  mapDispatchToProps
-)(FeedCard)
+export default connect(null, mapDispatchToProps)(FeedCard)

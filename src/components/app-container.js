@@ -18,7 +18,9 @@ class AppContainer extends React.Component {
           <MasonryLayout columns={isBrowser ? 2 : 1} gap={28}>
             {feedList.list.results
               .filter(feed => {
-                return appDetails(feed.app.nomenclature.name).present
+                return (
+                  appDetails(feed.app.nomenclature.name).present && feed.person
+                )
               })
               .map(feed => {
                 return (
