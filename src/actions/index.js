@@ -35,8 +35,18 @@ export const getMoreFeed = page => {
       type: 'SET_LOADED',
       payload: false
     })
+
+    const pageUrl = new URL(page)
+    const pageNo = pageUrl.searchParams.get('page')
+
+    console.log(page, pageNo)
+
     axios
-      .get(page)
+      .get(urlFeedList(), {
+        params: {
+          page: pageNo
+        }
+      })
       .then(res => {
         dispatch({
           type: 'SET_FEED_LIST_NEXT_PAGE',
