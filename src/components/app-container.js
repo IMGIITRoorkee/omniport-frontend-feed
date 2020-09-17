@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Icon } from 'semantic-ui-react'
+import { Segment, Icon, Button, Grid, } from 'semantic-ui-react'
+import { getTheme } from 'formula_one'
+
 import { isBrowser } from 'react-device-detect'
 
 import { MasonryLayout, appDetails } from 'formula_one'
@@ -10,6 +12,10 @@ import '../css/feed-card.css'
 import EmptyFeedCard from './emty-feed-card'
 
 class AppContainer extends React.Component {
+  loadMore = () => {
+    this.props.handleScroll({}, true)
+  }
+
   render () {
     const { feedList } = this.props
     return (
@@ -40,11 +46,27 @@ class AppContainer extends React.Component {
             })}
           </MasonryLayout>
         )}
-        {feedList.isLoaded && !feedList.list.next && (
+        {feedList.isLoaded && !feedList.list.next ? (
           <Segment basic textAlign='center'>
             <Icon name='frown outline' />
             No more bits available. You have scrolled enough for today.
           </Segment>
+        ) : (
+          <Grid>
+            <Grid.Column textAlign='center'>
+              <Button
+                basic
+                animated='vertical'
+                color={getTheme()}
+                onClick={this.loadMore}
+              >
+                <Button.Content visible>Show more</Button.Content>
+                <Button.Content hidden>
+                  <Icon name='arrow down' />
+                </Button.Content>
+              </Button>
+            </Grid.Column>
+          </Grid>
         )}
       </div>
     )

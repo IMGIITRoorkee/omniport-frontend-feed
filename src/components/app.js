@@ -13,10 +13,13 @@ class App extends React.PureComponent {
   componentDidMount () {
     this.props.InitialiseList()
   }
-  handleScroll = values => {
+  handleScroll = (values, forceLoad = false) => {
     const { feedList } = this.props
     if (feedList.isLoaded) {
-      if ((1 - values.top) * values.scrollHeight <= 800 && feedList.list.next) {
+      if (
+        (forceLoad || (1 - values.top) * values.scrollHeight <= 800) &&
+        feedList.list.next
+      ) {
         this.props.GetMoreFeed(feedList.list.next)
       }
     }
@@ -27,7 +30,7 @@ class App extends React.PureComponent {
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            <AppContainer />
+            <AppContainer handleScroll={this.handleScroll} />
           </Container>
         </Container>
       </Scrollbars>
@@ -51,7 +54,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
