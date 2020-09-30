@@ -52,21 +52,23 @@ class AppContainer extends React.Component {
             No more bits available. You have scrolled enough for today.
           </Segment>
         ) : (
-          <Grid>
-            <Grid.Column textAlign='center'>
-              <Button
-                basic
-                animated='vertical'
-                color={getTheme()}
-                onClick={this.loadMore}
-              >
-                <Button.Content visible>Show more</Button.Content>
-                <Button.Content hidden>
-                  <Icon name='arrow down' />
-                </Button.Content>
-              </Button>
-            </Grid.Column>
-          </Grid>
+          <div styleName='feed-loadmore-button-container'>
+            <Grid>
+              <Grid.Column textAlign='center'>
+                <Button
+                  basic
+                  animated='vertical'
+                  color={getTheme()}
+                  onClick={this.loadMore}
+                >
+                  <Button.Content visible>Show more</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name='arrow down' />
+                  </Button.Content>
+                </Button>
+              </Grid.Column>
+            </Grid>
+          </div>
         )}
       </div>
     )
