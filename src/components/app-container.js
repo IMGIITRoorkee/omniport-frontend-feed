@@ -10,6 +10,7 @@ import FeedCard from './feed-card'
 
 import '../css/feed-card.css'
 import EmptyFeedCard from './emty-feed-card'
+import birthdayAccordian from './birthday-accordian'
 
 class AppContainer extends React.Component {
   loadMore = () => {
@@ -19,6 +20,7 @@ class AppContainer extends React.Component {
   render () {
     const { feedList } = this.props
     return (
+      
       <div styleName='feed-container'>
         {feedList.list.results && (
           <MasonryLayout columns={isBrowser ? 2 : 1} gap={28}>
@@ -28,7 +30,7 @@ class AppContainer extends React.Component {
                   appDetails(feed.app.nomenclature.name).present && feed.person
                 )
               })
-              .map(feed => {
+              .map(feed => {            
                 return (
                   <FeedCard
                     key={feed.id}

@@ -2,12 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
-
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { initialiseList, getMoreFeed } from '../actions'
+import { initialiseList, getMoreFeed ,getBdaysToday} from '../actions'
 import AppContainer from './app-container'
-
-import main from 'formula_one/src/css/app.css'
+import CardCarousel from './card-carousel';
+import Slider from "react-slick";
+import BirthdayAccordion from './birthday-accordian';
+import BirthdayAccordianMobile from './birthday-accordian mobile';
+import { isMobile, isBrowser } from 'react-device-detect'
 
 class App extends React.PureComponent {
   componentDidMount () {
@@ -25,11 +27,18 @@ class App extends React.PureComponent {
     }
   }
   render () {
+    console.log(this.props)
     return (
       <Scrollbars autoHide onScrollFrame={this.handleScroll}>
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
+            {isBrowser &&
+            <BirthdayAccordion/>
+            }
+            {isMobile &&
+            <BirthdayAccordionMobile/>
+            }
             <AppContainer handleScroll={this.handleScroll} />
           </Container>
         </Container>

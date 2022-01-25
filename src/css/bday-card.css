@@ -1,0 +1,325 @@
+.accordion{
+    width: 1271px !important;
+    padding: 30px !important;
+    background: #FFFFFF;
+    border: 1px solid #E4E4E5;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+.acc-title{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 23px !important;
+    line-height: 28px;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btn-text{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+
+    color: #454545;
+}
+
+.btn-text.clicked{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.day-btn{
+    background: #FFFFFF !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box !important;
+    border-radius: 18px !important;
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px;
+    line-height: 14px !important;
+    text-align: center !important;
+
+    color: #454545 !important;
+}
+.day-btn.clicked{
+    background: #6435C9 !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box !important; 
+    border-radius: 18px !important;
+    font-family: Lato !important;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF !important;
+}
+.btn-grp1{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+.btn-grp2{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    align-items: center;
+}
+.filter-btn{
+    background: #FFFFFF !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box !important;
+    border-radius: 6px !important;
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    text-align: center !important;
+    color: #454545 !important;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.filter-btn.clicked{
+    background: #EDE4FF !important;
+    border: 1px solid #6435C9 !important;
+    box-sizing: border-box !important;
+    border-radius: 6px !important;
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    text-align: center !important;
+    color: #6435C9 !important;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.filter-txt{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    color: #454545;
+    margin-right: 12px;
+}
+.user-card{
+    height: 169px !important;
+    width: 132px !important;
+    margin-right: 20px !important;
+    margin-top: 0px !important;
+}
+.user-card-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.user-card2{
+    height: 91px !important;
+    width: 70px !important;
+    margin-right: 7px !important;
+    margin-top: 0px !important;
+    margin-bottom: 8px !important;
+    border-radius: 4px;
+}
+.user-card2-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.card-font{
+    font-family: Lato !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    text-align: center;
+
+    color: #000000 !important;
+}
+.card-font2{
+    font-family: Lato !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 6px !important;
+    line-height: 7px !important;
+    text-align: center;
+    color: #000000 !important;
+}
+
+.container {
+    padding: 40px;
+    background: #419be0 !important;
+  }
+
+
+.btn-grp3{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 1px #000; */
+}
+
+.accordion2{
+    width: 245px !important;
+    padding: 5px !important;
+    /* height: 230px !important; */
+    background: #FFFFFF;
+    border: 1px solid #E4E4E5;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: #FFFFFF !important;
+    width: 78px !important;
+    height: 30px;
+    box-sizing: border-box !important;
+    border-top: 0.2px solid #E7E7E7;
+    border-bottom: 0.2px solid #E7E7E7;
+    
+}
+.day-btn2{
+    background: #FFFFFF !important;
+    width: 70px !important;
+    height: 100%;
+    /* box-sizing: border-box !important; */
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 7px !important;
+    line-height: 10px !important;
+    text-align: center !important;
+    color: #8C8C8C !important;
+    bottom: 0px !important;
+    padding: 0px !important;
+}
+.day-btn2.clicked{
+    background: #FFFFFF !important;
+    width: 69px !important;
+    /* box-sizing: border-box !important; */
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 7px;
+    line-height: 10px !important;
+    text-align: center !important;
+    color: #6435C9 !important;
+    border-bottom: 1px solid #6435C9;
+    border-radius: 0px;
+    padding: 0px !important;
+}
+.acc-title2{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px !important;
+    line-height: 10px;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btn-grp4{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 8.5px;
+    align-items: center;
+    
+}
+.filter-btn2{
+    background: #FFFFFF !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: 550 !important;
+    font-size: 7px !important;
+    line-height: 8px !important;
+    text-align: center !important;
+    color: #454545 !important;
+    padding: 5px !important;
+    
+}
+.filter-btn2.clicked{
+    background: #EDE4FF !important;
+    border: 1px solid #6435C9 !important;
+    box-sizing: border-box !important;
+    border-radius: 10px !important;
+    font-family: Lato !important;
+    font-style: normal !important;
+    font-weight: 550 !important;
+    font-size: 7px !important;
+    line-height: 8px !important;
+    text-align: center !important;
+    color: #6435C9 !important;
+    
+}
+.show{
+    display: flex;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 6px !important;
+    line-height: 7px;
+    color: #000000 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box;
+    border-radius: 9px !important;
+    width: 150px;
+}
+
+.remark{
+    font-family: Lato;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 15px !important;
+    line-height: 18px;
+    color: #999999;
+    text-align: left;
+    margin-left: 5px;
+}
+.remark2{
+    font-family: Lato;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 8px !important;
+    line-height: 18px;
+    color: #999999;
+    text-align: left;
+    margin-left: 5px;
+}
+.carousel{
+    /* display: flex !important;
+    flex-direction: row !important; */
+    width: 100% !important;
+}

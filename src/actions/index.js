@@ -2,7 +2,7 @@ import axios from 'axios'
 import { toast } from 'react-semantic-toasts'
 
 import { getCookie } from 'formula_one'
-import { urlFeedList, urlFeedBit } from '../urls'
+import { urlFeedList, urlFeedBit , urlBdayTodayList, urlBdayTomList,urlWhoAmI,urlBdayList} from '../urls'
 
 export const initialiseList = () => {
   return dispatch => {
@@ -69,6 +69,10 @@ export const changeReport = (id, status) => {
     'X-CSRFToken': getCookie('csrftoken')
   }
   return dispatch => {
+    dispatch({
+      type: 'SET_LOADED',
+      payload: false
+    })
     axios
       .patch(urlFeedBit(id), { newReported: status }, { headers: headers })
       .then(res => {
@@ -89,3 +93,129 @@ export const changeReport = (id, status) => {
       })
   }
 }
+
+export const getBdaysToday = () => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_LOADED',
+      payload: false
+    })
+    axios
+      .get(urlBdayTodayList())
+      .then(res => {
+        dispatch({
+          type: 'SET_BDAY_LIST',
+          payload: {
+            isLoaded: true,
+            list: res.data
+          }
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_LOADED',
+          payload: true
+        })
+      })
+  }
+}
+
+export const getBdaysTom = () => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_LOADED',
+      payload: false
+    })
+    axios
+      .get(urlBdayTomList())
+      .then(res => {
+        dispatch({
+          type: 'SET_BDAY_LIST',
+          payload: {
+            isLoaded: true,
+            list: res.data
+          }
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_LOADED',
+          payload: true
+        })
+      })
+  }
+}
+
+// export const getBdaysDat = () => {
+//   return dispatch => {
+//     dispatch({
+//       type: 'SET_LOADED',
+//       payload: false
+//     })
+//     axios
+//       .get(urlBdayDatList())
+//       .then(res => {
+//         dispatch({
+//           type: 'SET_BDAY_LIST',
+//           payload: {
+//             isLoaded: true,
+//             list: res.data
+//           }
+//         })
+//       })
+//       .catch(() => {
+//         dispatch({
+//           type: 'SET_LOADED',
+//           payload: true
+//         })
+//       })
+//   }
+// }
+
+export const getBdays = (when) => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_LOADED',
+      payload: false
+    })
+    var day='bday-tom/';
+    if(when==0){
+      day= 'bday-today/'
+    }
+    else if (when==1){
+      day='bday-tom/'
+    }
+    else{
+      day='bday-dat/'
+    }
+    axios
+      .get(urlBdayList() + day)
+      .then(res => {
+        dispatch({
+          type: 'SET_BDAY_LIST',
+          payload: {
+            isLoaded: true,
+            list: res.data
+          }
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_LOADED',
+          payload: true
+        })
+      })
+  }
+}
+
+// export async const whoami=()=>{
+//   axios
+//         .get(urlWhoAmI())
+//         .then(response => {
+//           // console.log(response)
+//           return await response.data;
+//         })
+//         .catch(e => {
+//           console.warn(`Error while getting details`);
+//         });
+// }
