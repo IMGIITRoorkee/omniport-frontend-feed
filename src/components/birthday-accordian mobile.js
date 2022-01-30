@@ -2,17 +2,11 @@ import React, { Component } from 'react'
 import { Accordion, Form, Menu, Icon  } from 'semantic-ui-react'
 import { Button, Divider, Input, Segment } from 'semantic-ui-react'
 import axios from 'axios'
-import UserCard from './user-card';
 import CardExpand from './card-expanding-list';
-// import Carousel from 'react-elastic-carousel';
 import { getBdaysToday,getBdaysTom, getBdays} from '../actions';
 import { connect } from 'react-redux';
 import { urlWhoAmI } from '../urls';
-import { isMobile, isBrowser } from 'react-device-detect'
 import '../css/bday-card.css'
-
-
-import { Tab } from 'semantic-ui-react'
 
 
 class BirthdayAccordionMobile extends React.Component {
@@ -48,15 +42,11 @@ class BirthdayAccordionMobile extends React.Component {
   }
   
   filterBhawan(list,whoami){
-      console.log("performing")
       return list.filter(function(item){
         return (item.person.residentialinformation.residence.id == whoami.residentialinformation.residence.id);
      });
-    
-    console.log("entered")
-    console.log(list)
-    return list;
   }
+
   filterIndividualGroup(list,membership){
       return list.filter(function(item){
         return item.person.membershipSet.some(val => val.group === membership.group);
@@ -119,9 +109,8 @@ class BirthdayAccordionMobile extends React.Component {
     }
     this.setState({array: newIds})
     this.setState({display: false})
-    var a= this.filterList(this.props.bdayList,this.state.whoami,this.props.bdayList,newIds)
-    console.log(this.filterList(this.props.bdayList,this.state.whoami,this.props.bdayList,newIds))
-    this.setState({filteredList: a});
+    var filteredList= this.filterList(this.props.bdayList,this.state.whoami,this.props.bdayList,newIds)
+    this.setState({filteredList: filteredList});
   }
 
   AllClick = (e)=>{

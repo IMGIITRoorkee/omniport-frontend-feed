@@ -150,8 +150,8 @@
 }
 .card-font{
     font-family: Lato !important;
-    font-style: normal;
-    font-weight: 600 !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
     font-size: 12px !important;
     line-height: 14px !important;
     text-align: center;

@@ -1,19 +1,28 @@
 import React from 'react'
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
 import { initialiseList, getMoreFeed ,getBdaysToday} from '../actions'
 import AppContainer from './app-container'
-import CardCarousel from './card-carousel';
-import Slider from "react-slick";
+import { urlWhoAmI } from '../urls';
 import BirthdayAccordion from './birthday-accordian';
 import BirthdayAccordianMobile from './birthday-accordian mobile';
 import { isMobile, isBrowser } from 'react-device-detect'
 
 class App extends React.PureComponent {
+  state={ whoami:{}}
   componentDidMount () {
     this.props.InitialiseList()
+    axios
+          .get(urlWhoAmI())
+          .then(response => {
+            this.setState({whoami:  response.data})
+          })
+          .catch(e => {
+            console.warn(`Error while getting details`);
+          }); 
   }
   handleScroll = (values, forceLoad = false) => {
     const { feedList } = this.props
@@ -33,11 +42,11 @@ class App extends React.PureComponent {
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            {isBrowser &&
+            {isBrowser && this.state.whoami.student &&
             <BirthdayAccordion/>
             }
-            {isMobile &&
-            <BirthdayAccordionMobile/>
+            {isMobile && this.state.whoami.student &&
+            <BirthdayAccordianMobile/>
             }
             <AppContainer handleScroll={this.handleScroll} />
           </Container>

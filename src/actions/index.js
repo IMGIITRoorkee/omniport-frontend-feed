@@ -146,31 +146,6 @@ export const getBdaysTom = () => {
   }
 }
 
-// export const getBdaysDat = () => {
-//   return dispatch => {
-//     dispatch({
-//       type: 'SET_LOADED',
-//       payload: false
-//     })
-//     axios
-//       .get(urlBdayDatList())
-//       .then(res => {
-//         dispatch({
-//           type: 'SET_BDAY_LIST',
-//           payload: {
-//             isLoaded: true,
-//             list: res.data
-//           }
-//         })
-//       })
-//       .catch(() => {
-//         dispatch({
-//           type: 'SET_LOADED',
-//           payload: true
-//         })
-//       })
-//   }
-// }
 
 export const getBdays = (when) => {
   return dispatch => {
@@ -207,15 +182,3 @@ export const getBdays = (when) => {
       })
   }
 }
-
-// export async const whoami=()=>{
-//   axios
-//         .get(urlWhoAmI())
-//         .then(response => {
-//           // console.log(response)
-//           return await response.data;
-//         })
-//         .catch(e => {
-//           console.warn(`Error while getting details`);
-//         });
-// }

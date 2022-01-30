@@ -30,7 +30,7 @@ class CardExpand extends Component {
       newList = this.props.filteredList
     }
     const when = this.props.when
-    // console.log(this.props.whoami)
+
     return (
       <div>
       <div style={{display:"flex", flexWrap:"wrap"}}>

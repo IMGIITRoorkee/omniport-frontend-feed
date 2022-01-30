@@ -3,7 +3,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import UserCard from './user-card';
 import { Icon } from 'semantic-ui-react';
-// import '../css/bday-card.css';
+
 
 export default class Carousel extends React.Component {
   render() {
@@ -14,14 +14,13 @@ export default class Carousel extends React.Component {
         naturalSlideWidth={100}
         naturalSlideHeight={100}
         totalSlides={newList.length}
-        visibleSlides={4}
-        style={{width:"100%" , display:"flex"}}
+        visibleSlides={6}
+        style={{width:"100%" , display:"flex", height:"200px"}}
       >
-        <ButtonBack><Icon name="chevron left"/></ButtonBack>
+        <ButtonBack style={{alignSelf:"center",height:"45px",width:"45px",border:0, borderRadius:"50%",background: "rgba(100, 53, 201, 0.75)"}}><Icon name="chevron left" size='large' inverted color='white'/></ButtonBack>
 
         <Slider style={{
-          // display: "flex", 
-          // flexDirection: "row",
+          width:"100%",
           alignItems: "center"
           }}>
           { newList.map((card,index)=>{
@@ -29,7 +28,7 @@ export default class Carousel extends React.Component {
            })}
         </Slider>
         
-        <ButtonNext><Icon name="chevron right"/></ButtonNext>
+        <ButtonNext style={{JustifySelf:"flex-end", alignSelf:"center",height:"45px",width:"45px",border:0, borderRadius:"50%",background: "rgba(100, 53, 201, 0.75)"}}><Icon name="chevron right" size='large' inverted color='white'/></ButtonNext>
       </CarouselProvider>
     );
   }

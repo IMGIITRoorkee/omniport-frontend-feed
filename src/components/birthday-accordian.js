@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { Accordion, Form, Menu, Icon  } from 'semantic-ui-react'
 import { Button, Divider, Input, Segment } from 'semantic-ui-react'
 import axios from 'axios'
-import UserCard from './user-card';
 import CardCarousel from './card-carousel';
 import { getBdaysToday,getBdaysTom, getBdays} from '../actions';
 import { connect } from 'react-redux';
 import { urlWhoAmI } from '../urls';
-import { isMobile, isBrowser } from 'react-device-detect';
 import '../css/bday-card.css';
 
 
@@ -15,7 +13,7 @@ import '../css/bday-card.css';
 class BirthdayAccordion extends React.Component {
   
   state = { activeIndex: 0 , number:0, array: [true,false,false,false,false] , whoami:{}, filteredList:[],display:true}
-  componentDidMount () {
+  componentWillMount () {
     this.props.BdayList(this.state.number)  
     axios
           .get(urlWhoAmI())
@@ -130,7 +128,6 @@ class BirthdayAccordion extends React.Component {
     const { activeIndex } = this.state
     const { bdayList } = this.props
     return (
-      // {isBrowser &&
       <Accordion  vertical styleName='accordion'>
         
           <Accordion.Title
@@ -187,7 +184,6 @@ class BirthdayAccordion extends React.Component {
             </div>
           </Accordion.Content>
       </Accordion>
-      
               
     )
   }
