@@ -7,7 +7,6 @@ import { MasonryLayout, appDetails } from 'formula_one'
 import FeedCard from './feed-card'
 import '../css/feed-card.css'
 import EmptyFeedCard from './emty-feed-card'
-import birthdayAccordian from './birthday-accordian'
 
 class AppContainer extends React.Component {
   loadMore = () => {

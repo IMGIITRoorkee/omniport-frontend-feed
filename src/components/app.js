@@ -8,8 +8,6 @@ import { initialiseList, getMoreFeed ,getBdaysToday} from '../actions'
 import AppContainer from './app-container'
 import { urlWhoAmI } from '../urls';
 import BirthdayAccordion from './birthday-accordian';
-import BirthdayAccordianMobile from './birthday-accordian mobile';
-import { isMobile, isBrowser } from 'react-device-detect'
 
 class App extends React.PureComponent {
   state={ whoami:{}}
@@ -42,11 +40,8 @@ class App extends React.PureComponent {
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            {isBrowser && this.state.whoami.student &&
+            {this.state.whoami.student &&
             <BirthdayAccordion/>
-            }
-            {isMobile && this.state.whoami.student &&
-            <BirthdayAccordianMobile/>
             }
             <AppContainer handleScroll={this.handleScroll} />
           </Container>

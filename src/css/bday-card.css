@@ -319,7 +319,5 @@
     margin-left: 5px;
 }
 .carousel{
-    /* display: flex !important;
-    flex-direction: row !important; */
     width: 100% !important;
 }
