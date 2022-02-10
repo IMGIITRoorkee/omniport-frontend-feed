@@ -1,8 +1,8 @@
 export function urlFeedList () {
   return `/api/feed/bit/`
 }
-export function urlWhoAmI () {
-  return `/api/feed/who_am_i/`
+export function urlPersonalDetails () {
+  return `/api/feed/personal_details/`
 }
 export function urlBdayList () {
   return `/api/feed/birthday/`

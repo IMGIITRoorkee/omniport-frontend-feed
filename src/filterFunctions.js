@@ -20,8 +20,8 @@ export function filterYear(list, whoami) {
 export function filterBhawan(list, whoami) {
   return list.filter(function (item) {
     return (
-      item.person.residentialinformation.residence.id ==
-      whoami.residentialinformation.residence.id
+      item.person.residentialinformation ==
+      whoami.residentialinformation
     );
   });
 }
@@ -29,7 +29,7 @@ export function filterBhawan(list, whoami) {
 export function filterIndividualGroup(list, membership) {
   return list.filter(function (item) {
     return item.person.membershipSet.some(
-      (val) => val.group === membership.group
+      (val) => val === membership
     );
   });
 }

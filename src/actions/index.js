@@ -1,27 +1,20 @@
-import axios from "axios";
-import { toast } from "react-semantic-toasts";
+import axios from 'axios';
+import { toast } from 'react-semantic-toasts';
 
-import { getCookie } from "formula_one";
-import {
-  urlFeedList,
-  urlFeedBit,
-  urlBdayTodayList,
-  urlBdayTomList,
-  urlWhoAmI,
-  urlBdayList,
-} from "../urls";
+import { getCookie } from 'formula_one';
+import { urlFeedList, urlFeedBit, urlBdayList, urlPersonalDetails } from '../urls';
 
 export const initialiseList = () => {
   return (dispatch) => {
     dispatch({
-      type: "SET_LOADED",
+      type: 'SET_LOADED',
       payload: false,
     });
     axios
       .get(urlFeedList())
       .then((res) => {
         dispatch({
-          type: "SET_FEED_LIST",
+          type: 'SET_FEED_LIST',
           payload: {
             isLoaded: true,
             list: res.data,
@@ -30,7 +23,7 @@ export const initialiseList = () => {
       })
       .catch(() => {
         dispatch({
-          type: "SET_LOADED",
+          type: 'SET_LOADED',
           payload: true,
         });
       });
@@ -39,12 +32,12 @@ export const initialiseList = () => {
 export const getMoreFeed = (page) => {
   return (dispatch) => {
     dispatch({
-      type: "SET_LOADED",
+      type: 'SET_LOADED',
       payload: false,
     });
 
     const pageUrl = new URL(page);
-    const pageNo = pageUrl.searchParams.get("page");
+    const pageNo = pageUrl.searchParams.get('page');
 
     console.log(page, pageNo);
 
@@ -56,7 +49,7 @@ export const getMoreFeed = (page) => {
       })
       .then((res) => {
         dispatch({
-          type: "SET_FEED_LIST_NEXT_PAGE",
+          type: 'SET_FEED_LIST_NEXT_PAGE',
           payload: {
             isLoaded: true,
             list: res.data,
@@ -65,7 +58,7 @@ export const getMoreFeed = (page) => {
       })
       .catch(() => {
         dispatch({
-          type: "SET_LOADED",
+          type: 'SET_LOADED',
           payload: true,
         });
       });
@@ -73,53 +66,46 @@ export const getMoreFeed = (page) => {
 };
 export const changeReport = (id, status) => {
   let headers = {
-    "X-CSRFToken": getCookie("csrftoken"),
+    'X-CSRFToken': getCookie('csrftoken'),
   };
   return (dispatch) => {
     dispatch({
-      type: "SET_LOADED",
+      type: 'SET_LOADED',
       payload: false,
     });
     axios
       .patch(urlFeedBit(id), { newReported: status }, { headers: headers })
       .then((res) => {
         dispatch({
-          type: "SET_REPORTED",
+          type: 'SET_REPORTED',
           payload: res.data,
         });
       })
       .catch(() => {
         toast({
-          type: "error",
-          title: "Error",
-          description: "Some error occured while reporting",
-          animation: "fade up",
-          icon: "frown up",
+          type: 'error',
+          title: 'Error',
+          description: 'Some error occured while reporting',
+          animation: 'fade up',
+          icon: 'frown up',
           time: 3000,
         });
       });
   };
 };
 
-export const getBdays = (when) => {
+export const getBdays = (day) => {
   return (dispatch) => {
     dispatch({
-      type: "SET_LOADED",
+      type: 'SET_LOADED',
       payload: false,
     });
-    var day = "bday-tom/";
-    if (when == 0) {
-      day = "?bdayDay=today";
-    } else if (when == 1) {
-      day = "?bdayDay=tom";
-    } else {
-      day = "?bdayDay=dat";
-    }
+    var bdayParam = '?bdayDay=' + day;
     axios
-      .get(urlBdayList() + day)
+      .get(urlBdayList() + bdayParam)
       .then((res) => {
         dispatch({
-          type: "SET_BDAY_LIST",
+          type: 'SET_BDAY_LIST',
           payload: {
             isLoaded: true,
             list: res.data.results,
@@ -128,7 +114,33 @@ export const getBdays = (when) => {
       })
       .catch(() => {
         dispatch({
-          type: "SET_LOADED",
+          type: 'SET_LOADED',
+          payload: true,
+        });
+      });
+  };
+};
+
+export const whoami = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_LOADED',
+      payload: false,
+    });
+    axios
+      .get(urlPersonalDetails())
+      .then((res) => {
+        dispatch({
+          type: 'SET_WHO_AM_I',
+          payload: {
+            isLoaded: true,
+            whoami: res.data,
+          },
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_LOADED',
           payload: true,
         });
       });

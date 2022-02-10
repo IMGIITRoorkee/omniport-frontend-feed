@@ -1,57 +1,52 @@
-import React, { Component } from "react";
-import { Accordion, Form, Menu, Icon } from "semantic-ui-react";
-import { Button, Divider, Input, Segment } from "semantic-ui-react";
-import axios from "axios";
-import CardCarousel from "./card-carousel";
-import { getBdays } from "../actions";
-import { connect } from "react-redux";
-import { urlWhoAmI } from "../urls";
-import "../css/bday-card.css";
+import React from 'react';
+import { Accordion, Icon } from 'semantic-ui-react';
+import { Button, Divider } from 'semantic-ui-react';
+import CardCarousel from './card-carousel';
+import { getBdays, whoami } from '../actions';
+import { connect } from 'react-redux';
+import '../css/bday-card.css';
 import {
   filterBatch,
   filterBhawan,
   filterGroup,
   filterYear,
-} from "../filterFunctions";
-import { getTheme } from "formula_one";
-import { isMobile, isBrowser } from "react-device-detect";
-import CardExpand from "./card-expanding-list";
+} from '../filterFunctions';
+import { isMobile, isBrowser } from 'react-device-detect';
+import CardExpand from './card-expanding-list';
+import { IndextoDay } from '../constants';
 
 class BirthdayAccordion extends React.Component {
   state = {
     activeIndex: 0,
-    number: 0,
-    array: [true, false, false, false, false],
-    //here array defines the state of filter buttons in order which is All, Same Group, Same Batch, Same Bhawan, Same Year
+    day: 0,
+    filterState: {
+      all: true,
+      group: false,
+      batch: false,
+      bhawan: false,
+      year: false,
+    },
     whoami: {},
     filteredList: [],
     display: true,
   };
   componentWillMount() {
-    this.props.BdayList(this.state.number);
-    axios
-      .get(urlWhoAmI())
-      .then((response) => {
-        this.setState({ whoami: response.data });
-      })
-      .catch((e) => {
-        console.warn(`Error while getting details`);
-      });
+    this.props.BdayList(IndextoDay[this.state.day]);
   }
 
-  filterList(list, whoami, newList, array) {
+  filterList(list, whoami, newList, filterArray) {
     if (list.isLoaded) {
       newList = newList.list;
-      if (array[1]) {
+      if (filterArray[1]) {
         newList = filterGroup(newList, whoami);
       }
-      if (array[2]) {
+      if (filterArray[2]) {
         newList = filterBatch(newList, whoami);
       }
-      if (array[3]) {
+      if (filterArray[3]) {
         newList = filterBhawan(newList, whoami);
       }
-      if (array[4]) {
+      if (filterArray[4]) {
         newList = filterYear(newList, whoami);
       }
       this.setState({ display: true });
@@ -61,6 +56,7 @@ class BirthdayAccordion extends React.Component {
     this.setState({ filteredList: list });
     return list.list;
   }
+
   handleClick = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
@@ -68,42 +64,66 @@ class BirthdayAccordion extends React.Component {
 
     this.setState({ activeIndex: newIndex });
   };
-  filterClick(x) {
-    const newIds = this.state.array.slice();
-    newIds[x] = !newIds[x];
-    let result = newIds.every(function (e) {
-      return e == false;
+
+  changeFilters(currentFilters, filterArray) {
+    currentFilters.group = filterArray[1];
+    currentFilters.batch = filterArray[2];
+    currentFilters.bhawan = filterArray[3];
+    currentFilters.year = filterArray[4];
+    return currentFilters;
+  }
+
+  filterClick(index) {
+    var currentFilters = this.state.filterState;
+    var filterArray = Object.values(currentFilters);
+    filterArray[index] = !filterArray[index];
+    let result = filterArray.every(function (e) {
+      return e === false;
     });
+    currentFilters = this.changeFilters(currentFilters, filterArray);
+
     if (result) {
-      newIds[0] = true;
+      currentFilters.all = true;
     } else {
-      newIds[0] = false;
+      currentFilters.all = false;
     }
-    this.setState({ array: newIds });
+
+    this.setState({ filterState: currentFilters });
     this.setState({ display: false });
-    var a = this.filterList(
+
+    var filteredList = this.filterList(
       this.props.bdayList,
-      this.state.whoami,
+      this.props.whoami.whoami,
       this.props.bdayList,
-      newIds
+      Object.values(currentFilters)
     );
-    this.setState({ filteredList: a });
+    this.setState({ filteredList: filteredList });
   }
 
   AllClick = (e) => {
-    this.setState({ array: [true, false, false, false, false] });
+    this.setState({
+      filterState: {
+        all: true,
+        group: false,
+        batch: false,
+        bhawan: false,
+        year: false,
+      },
+    });
   };
+
   changeIndex(i) {
     this.AllClick();
-    this.setState({ number: i });
-    this.props.BdayList(i);
+    this.setState({ day: i });
+    this.props.BdayList(IndextoDay[i]);
   }
 
   render() {
     const { activeIndex } = this.state;
     const { bdayList } = this.props;
+    const { whoami } = this.props;
     return (
-      <Accordion vertical styleName={isBrowser? "accordion": "accordion2"}>
+      <Accordion vertical styleName={isBrowser ? 'accordion' : 'accordion2'}>
         {isBrowser && (
           <>
             <Accordion.Title
@@ -113,19 +133,26 @@ class BirthdayAccordion extends React.Component {
             >
               <div styleName="acc-title">
                 <div>
-                  <img src="../icons/gift-box.svg" style={{marginRight:"14px", height:"40px", width:"40px"}}/>
+                  <img
+                    src="/branding/site/giftbox.svg"
+                    style={{
+                      marginRight: '14px',
+                      height: '40px',
+                      width: '40px',
+                    }}
+                  />
                   Birthdays
-                  </div>
+                </div>
 
                 <Icon name="dropdown" />
               </div>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === 0}>
-              <Divider style={{ border: "1px solid #F3F4F4", height: "0px" }} />
+              <Divider style={{ border: '1px solid #F3F4F4', height: '0px' }} />
               <div styleName="btn-grp1">
                 <Button
                   styleName={
-                    this.state.number === 0 ? "day-btn clicked" : "day-btn"
+                    this.state.day === 0 ? 'day-btn clicked' : 'day-btn'
                   }
                   content="Today"
                   onClick={() => {
@@ -134,7 +161,7 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.number === 1 ? "day-btn clicked" : "day-btn"
+                    this.state.day === 1 ? 'day-btn clicked' : 'day-btn'
                   }
                   content="Tomorrow"
                   onClick={() => {
@@ -143,7 +170,7 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.number === 2 ? "day-btn clicked" : "day-btn"
+                    this.state.day === 2 ? 'day-btn clicked' : 'day-btn'
                   }
                   content="Day After Tomorrow"
                   onClick={() => {
@@ -151,9 +178,9 @@ class BirthdayAccordion extends React.Component {
                   }}
                 />
               </div>
-              <Divider style={{ border: "1px solid #F3F4F4", height: "0px" }} />
+              <Divider style={{ border: '1px solid #F3F4F4', height: '0px' }} />
               <div styleName="btn-grp2">
-                <div style={{ marginRight: "6px" }}>
+                <div style={{ marginRight: '6px' }}>
                   <svg
                     width="16"
                     height="16"
@@ -170,7 +197,9 @@ class BirthdayAccordion extends React.Component {
                 <div styleName="filter-txt">Filters:</div>
                 <Button
                   styleName={
-                    this.state.array[0] ? "filter-btn clicked" : "filter-btn"
+                    this.state.filterState.all
+                      ? 'filter-btn clicked'
+                      : 'filter-btn'
                   }
                   content="All"
                   onClick={() => {
@@ -179,7 +208,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[1] ? "filter-btn clicked" : "filter-btn"
+                    this.state.filterState.group
+                      ? 'filter-btn clicked'
+                      : 'filter-btn'
                   }
                   content="Same Group"
                   onClick={() => {
@@ -188,7 +219,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[2] ? "filter-btn clicked" : "filter-btn"
+                    this.state.filterState.batch
+                      ? 'filter-btn clicked'
+                      : 'filter-btn'
                   }
                   content="Same Batch"
                   onClick={() => {
@@ -197,7 +230,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[3] ? "filter-btn clicked" : "filter-btn"
+                    this.state.filterState.bhawan
+                      ? 'filter-btn clicked'
+                      : 'filter-btn'
                   }
                   content="Same Bhawan"
                   onClick={() => {
@@ -206,7 +241,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[4] ? "filter-btn clicked" : "filter-btn"
+                    this.state.filterState.year
+                      ? 'filter-btn clicked'
+                      : 'filter-btn'
                   }
                   content="Same Year"
                   onClick={() => {
@@ -215,11 +252,9 @@ class BirthdayAccordion extends React.Component {
                 />
               </div>
               <div>
-                {this.state.whoami.id && (
+                {this.props.whoami.whoami.id && (
                   <CardCarousel
-                    when={this.state.number}
-                    array={this.state.array}
-                    whoami={this.state.whoami}
+                    all={this.state.filterState.all}
                     filteredList={this.state.filteredList}
                     display={this.state.display}
                   />
@@ -247,7 +282,7 @@ class BirthdayAccordion extends React.Component {
                 <div styleName="btn-container">
                   <Button
                     styleName={
-                      this.state.number === 0 ? "day-btn2 clicked" : "day-btn2"
+                      this.state.day === 0 ? 'day-btn2 clicked' : 'day-btn2'
                     }
                     content="Today"
                     onClick={() => {
@@ -257,11 +292,11 @@ class BirthdayAccordion extends React.Component {
                 </div>
                 <div
                   styleName="btn-container"
-                  style={{ border: "0.5px solid #E7E7E7" }}
+                  style={{ border: '0.5px solid #E7E7E7' }}
                 >
                   <Button
                     styleName={
-                      this.state.number === 1 ? "day-btn2 clicked" : "day-btn2"
+                      this.state.day === 1 ? 'day-btn2 clicked' : 'day-btn2'
                     }
                     content="Tomorrow"
                     onClick={() => {
@@ -272,7 +307,7 @@ class BirthdayAccordion extends React.Component {
                 <div styleName="btn-container">
                   <Button
                     styleName={
-                      this.state.number === 2 ? "day-btn2 clicked" : "day-btn2"
+                      this.state.day === 2 ? 'day-btn2 clicked' : 'day-btn2'
                     }
                     content="Day after Tomorrow"
                     onClick={() => {
@@ -285,7 +320,9 @@ class BirthdayAccordion extends React.Component {
               <div styleName="btn-grp4">
                 <Button
                   styleName={
-                    this.state.array[1] ? "filter-btn2 clicked" : "filter-btn2"
+                    this.state.filterState.group
+                      ? 'filter-btn2 clicked'
+                      : 'filter-btn2'
                   }
                   content="Same Group"
                   onClick={() => {
@@ -294,7 +331,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[2] ? "filter-btn2 clicked" : "filter-btn2"
+                    this.state.filterState.batch
+                      ? 'filter-btn2 clicked'
+                      : 'filter-btn2'
                   }
                   content="Same Batch"
                   onClick={() => {
@@ -303,7 +342,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[3] ? "filter-btn2 clicked" : "filter-btn2"
+                    this.state.filterState.bhawan
+                      ? 'filter-btn2 clicked'
+                      : 'filter-btn2'
                   }
                   content="Same Bhawan"
                   onClick={() => {
@@ -312,7 +353,9 @@ class BirthdayAccordion extends React.Component {
                 />
                 <Button
                   styleName={
-                    this.state.array[4] ? "filter-btn2 clicked" : "filter-btn2"
+                    this.state.filterState.year
+                      ? 'filter-btn2 clicked'
+                      : 'filter-btn2'
                   }
                   content="Same Year"
                   onClick={() => {
@@ -321,11 +364,10 @@ class BirthdayAccordion extends React.Component {
                 />
               </div>
               <div>
-                {this.state.whoami.id && (
+                {this.props.whoami.whoami.id && (
                   <CardExpand
-                    when={this.state.number}
-                    array={this.state.array}
-                    whoami={this.state.whoami}
+                    all={this.state.filterState.all}
+                    whoami={this.props.whoami.whoami}
                     filteredList={this.state.filteredList}
                     display={this.state.display}
                   />
@@ -342,13 +384,14 @@ function mapStateToProps(state) {
   return {
     bdayList: state.bdayList,
     filteredList: state.filteredList,
+    whoami: state.whoami,
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    BdayList: (number) => {
-      dispatch(getBdays(number));
+    BdayList: (day) => {
+      dispatch(getBdays(day));
     },
   };
 };

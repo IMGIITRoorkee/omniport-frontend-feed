@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import UserCard from "./user-card";
-import { Button, Divider, Input, Segment } from "semantic-ui-react";
-import "../css/bday-card.css";
-import { connect } from "react-redux";
-import { Icon } from "semantic-ui-react";
+import React, { Component } from 'react';
+import UserCard from './user-card';
+import { Button, Divider, Input, Segment } from 'semantic-ui-react';
+import '../css/bday-card.css';
+import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react';
 
 class CardExpand extends Component {
   state = { expanded: false, visible: 3 };
@@ -19,18 +19,17 @@ class CardExpand extends Component {
   };
   render() {
     const { bdayList } = this.props;
-    const { array } = this.props;
+    const { all } = this.props;
     const { display } = this.props;
 
     var newList = bdayList.list;
-    if (!array[0]) {
+    if (!all) {
       newList = this.props.filteredList;
     }
-    const when = this.props.when;
 
     return (
       <div>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {display &&
             bdayList.isLoaded &&
             newList.slice(0, this.state.visible).map((card) => {
@@ -49,7 +48,7 @@ class CardExpand extends Component {
                 this.showMoreItems();
               }}
             >
-              <div style={{ marginRight: "4.5px", display: "inline" }}>
+              <div style={{ marginRight: '4.5px', display: 'inline' }}>
                 Show More
               </div>
               <Icon name="chevron down" />
@@ -62,7 +61,7 @@ class CardExpand extends Component {
                 this.showLessItems();
               }}
             >
-              <div style={{ marginRight: "4.5px", display: "inline" }}>
+              <div style={{ marginRight: '4.5px', display: 'inline' }}>
                 Show Less
               </div>
               <Icon name="chevron up" />

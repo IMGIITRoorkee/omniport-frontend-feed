@@ -1,27 +1,18 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { initialiseList, getMoreFeed ,getBdaysToday} from '../actions'
+import { initialiseList, getMoreFeed ,whoami} from '../actions'
 import AppContainer from './app-container'
-import { urlWhoAmI } from '../urls';
 import BirthdayAccordion from './birthday-accordian';
 
 class App extends React.PureComponent {
-  state={ whoami:{}}
   componentDidMount () {
     this.props.InitialiseList()
-    axios
-          .get(urlWhoAmI())
-          .then(response => {
-            this.setState({whoami:  response.data})
-          })
-          .catch(e => {
-            console.warn(`Error while getting details`);
-          }); 
+    this.props.PersonalDetails()
   }
+
   handleScroll = (values, forceLoad = false) => {
     const { feedList } = this.props
     if (feedList.isLoaded) {
@@ -33,16 +24,17 @@ class App extends React.PureComponent {
       }
     }
   }
-  render () {
-    console.log(this.props)
+
+  render () { 
+    const { whoami } = this.props
     return (
       <Scrollbars autoHide onScrollFrame={this.handleScroll}>
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            {this.state.whoami.student &&
+            {whoami.whoami && whoami.whoami.student &&
             <BirthdayAccordion/>
-            }
+  }
             <AppContainer handleScroll={this.handleScroll} />
           </Container>
         </Container>
@@ -53,7 +45,9 @@ class App extends React.PureComponent {
 
 function mapStateToProps (state) {
   return {
-    feedList: state.feedList
+    whoami : state.whoami,
+    feedList: state.feedList,
+    
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -63,6 +57,9 @@ const mapDispatchToProps = dispatch => {
     },
     GetMoreFeed: page => {
       dispatch(getMoreFeed(page))
+    },
+    PersonalDetails : ()=>{
+      dispatch(whoami())
     }
   }
 }
