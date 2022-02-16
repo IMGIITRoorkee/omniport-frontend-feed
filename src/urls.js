@@ -4,8 +4,8 @@ export function urlFeedList () {
 export function urlPersonalDetails () {
   return `/api/feed/personal_details/`
 }
-export function urlBdayList () {
-  return `/api/feed/birthday/`
+export function urlBdayList (day) {
+  return `/api/feed/birthday/?bdayDay=${day}`
 }
 export function urlFeedBit (id) {
   return `${urlFeedList()}${id}/`

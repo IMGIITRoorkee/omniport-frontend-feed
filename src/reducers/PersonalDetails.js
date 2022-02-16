@@ -1,19 +1,22 @@
-const initialState = {};
+const initialState = {
+  isLoaded: false,
+  details: {}
+}
 
-const whoami = (state = initialState, action) => {
+const personalDetails = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_WHO_AM_I':
-      return action.payload;
+    case 'SET_PERSONAL_DETAILS':
+      return action.payload
 
     case 'SET_LOADED':
       return {
         ...state,
         isLoaded: action.payload,
-      };
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default whoami;
+export default personalDetails

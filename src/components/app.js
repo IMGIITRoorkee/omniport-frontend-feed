@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { initialiseList, getMoreFeed ,whoami} from '../actions'
+import { initialiseList, getMoreFeed , getPersonalDetails} from '../actions'
 import AppContainer from './app-container'
-import BirthdayAccordion from './birthday-accordian';
+import BirthdayAccordion from './birthday-accordian'
+
+import main from 'formula_one/src/css/app.css'
 
 class App extends React.PureComponent {
   componentDidMount () {
@@ -26,13 +28,13 @@ class App extends React.PureComponent {
   }
 
   render () { 
-    const { whoami } = this.props
+    const { personalDetails } = this.props
     return (
       <Scrollbars autoHide onScrollFrame={this.handleScroll}>
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            {whoami.whoami && whoami.whoami.student &&
+            {personalDetails.details && personalDetails.details.student &&
             <BirthdayAccordion/>
   }
             <AppContainer handleScroll={this.handleScroll} />
@@ -45,7 +47,7 @@ class App extends React.PureComponent {
 
 function mapStateToProps (state) {
   return {
-    whoami : state.whoami,
+    personalDetails : state.personalDetails,
     feedList: state.feedList,
     
   }
@@ -59,7 +61,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(getMoreFeed(page))
     },
     PersonalDetails : ()=>{
-      dispatch(whoami())
+      dispatch(getPersonalDetails())
     }
   }
 }

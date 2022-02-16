@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 import {
   CarouselProvider,
   Slider,
   Slide,
   ButtonBack,
   ButtonNext,
-} from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import UserCard from './user-card';
-import { Icon } from 'semantic-ui-react';
+} from 'pure-react-carousel'
+import 'pure-react-carousel/dist/react-carousel.es.css'
+import UserCard from './user-card'
+import { Icon } from 'semantic-ui-react'
 
 export default class Carousel extends React.Component {
   render() {
-    var newList = this.props.newList;
+    var newList = this.props.newList
     return (
       <CarouselProvider
         naturalSlideWidth={100}
@@ -31,7 +31,7 @@ export default class Carousel extends React.Component {
             background: 'rgba(100, 53, 201, 0.75)',
           }}
         >
-          <Icon name="chevron left" size="large" inverted color="white" />
+          <Icon name='chevron left' size='large' inverted color='white' />
         </ButtonBack>
 
         <Slider
@@ -46,7 +46,7 @@ export default class Carousel extends React.Component {
               <Slide index={index} style={{ width: '155px', height: '180px' }}>
                 <UserCard name={card.person.fullName} />
               </Slide>
-            );
+            )
           })}
         </Slider>
 
@@ -61,9 +61,9 @@ export default class Carousel extends React.Component {
             background: 'rgba(100, 53, 201, 0.75)',
           }}
         >
-          <Icon name="chevron right" size="large" inverted color="white" />
+          <Icon name='chevron right' size='large' inverted color='white' />
         </ButtonNext>
       </CarouselProvider>
-    );
+    )
   }
 }

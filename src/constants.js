@@ -1,13 +1,14 @@
-export const IndextoDay = {
-  0: 'today', 
-  1: 'tomorrow', 
-  2: 'day-after-tomorrow', 
-};
+export const CONTENT_OF_DAY ={
+  'today': 'Today',
+  'tomorrow' : 'Tomorrow',
+  'day-after-tomorrow': 'Day after Tomorrow'
+}
 
-export const IndextoFilter = {
-  0: 'all',
-  1: 'group',
-  2: 'batch',
-  3: 'bhawan',
-  4: 'year',
-};
+export const CONTENT_OF_FILTERS= {
+  'all': 'All',
+  'group': 'Same Group',
+  'batch': 'Same Batch',
+  'bhawan': 'Same Bhawan',
+  'year': 'Same Year'
+}
+

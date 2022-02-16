@@ -1,45 +1,50 @@
-import axios from 'axios';
-import { toast } from 'react-semantic-toasts';
+import axios from 'axios'
+import { toast } from 'react-semantic-toasts'
 
-import { getCookie } from 'formula_one';
-import { urlFeedList, urlFeedBit, urlBdayList, urlPersonalDetails } from '../urls';
+import { getCookie } from 'formula_one'
+import {
+  urlFeedList,
+  urlFeedBit,
+  urlBdayList,
+  urlPersonalDetails,
+} from '../urls'
 
 export const initialiseList = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: 'SET_LOADED',
       payload: false,
-    });
+    })
     axios
       .get(urlFeedList())
-      .then((res) => {
+      .then(res => {
         dispatch({
           type: 'SET_FEED_LIST',
           payload: {
             isLoaded: true,
             list: res.data,
           },
-        });
+        })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true,
-        });
-      });
-  };
-};
-export const getMoreFeed = (page) => {
-  return (dispatch) => {
+        })
+      })
+  }
+}
+export const getMoreFeed = page => {
+  return dispatch => {
     dispatch({
       type: 'SET_LOADED',
       payload: false,
-    });
+    })
 
-    const pageUrl = new URL(page);
-    const pageNo = pageUrl.searchParams.get('page');
+    const pageUrl = new URL(page)
+    const pageNo = pageUrl.searchParams.get('page')
 
-    console.log(page, pageNo);
+    console.log(page, pageNo)
 
     axios
       .get(urlFeedList(), {
@@ -47,39 +52,39 @@ export const getMoreFeed = (page) => {
           page: pageNo,
         },
       })
-      .then((res) => {
+      .then(res => {
         dispatch({
           type: 'SET_FEED_LIST_NEXT_PAGE',
           payload: {
             isLoaded: true,
             list: res.data,
           },
-        });
+        })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true,
-        });
-      });
-  };
-};
+        })
+      })
+  }
+}
 export const changeReport = (id, status) => {
   let headers = {
     'X-CSRFToken': getCookie('csrftoken'),
-  };
-  return (dispatch) => {
+  }
+  return dispatch => {
     dispatch({
       type: 'SET_LOADED',
       payload: false,
-    });
+    })
     axios
       .patch(urlFeedBit(id), { newReported: status }, { headers: headers })
-      .then((res) => {
+      .then(res => {
         dispatch({
           type: 'SET_REPORTED',
           payload: res.data,
-        });
+        })
       })
       .catch(() => {
         toast({
@@ -89,60 +94,59 @@ export const changeReport = (id, status) => {
           animation: 'fade up',
           icon: 'frown up',
           time: 3000,
-        });
-      });
-  };
-};
+        })
+      })
+  }
+}
 
-export const getBdays = (day) => {
-  return (dispatch) => {
+export const getBdays = day => {
+  return dispatch => {
     dispatch({
       type: 'SET_LOADED',
       payload: false,
-    });
-    var bdayParam = '?bdayDay=' + day;
+    })
     axios
-      .get(urlBdayList() + bdayParam)
-      .then((res) => {
+      .get(urlBdayList(day))
+      .then(res => {
         dispatch({
           type: 'SET_BDAY_LIST',
           payload: {
             isLoaded: true,
             list: res.data.results,
           },
-        });
+        })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true,
-        });
-      });
-  };
-};
+        })
+      })
+  }
+}
 
-export const whoami = () => {
-  return (dispatch) => {
+export const getPersonalDetails = () => {
+  return dispatch => {
     dispatch({
       type: 'SET_LOADED',
       payload: false,
-    });
+    })
     axios
       .get(urlPersonalDetails())
-      .then((res) => {
+      .then(res => {
         dispatch({
-          type: 'SET_WHO_AM_I',
+          type: 'SET_PERSONAL_DETAILS',
           payload: {
             isLoaded: true,
-            whoami: res.data,
+            details: res.data,
           },
-        });
+        })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
           payload: true,
-        });
-      });
-  };
-};
+        })
+      })
+  }
+}

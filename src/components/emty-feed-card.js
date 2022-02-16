@@ -1,11 +1,11 @@
-import React from 'react';
-import { Card, Placeholder } from 'semantic-ui-react';
+import React from 'react'
+import { Card, Placeholder } from 'semantic-ui-react'
 
-import '../css/feed-card.css';
+import '../css/feed-card.css'
 
 export default class EmptyFeedCard extends React.Component {
   render() {
-    const { image } = this.props;
+    const { image } = this.props
     return (
       <Card fluid>
         <Card.Content>
@@ -19,8 +19,8 @@ export default class EmptyFeedCard extends React.Component {
         <Card.Content>
           <Placeholder>
             <Placeholder.Paragraph>
-              <Placeholder.Line length="full" />
-              <Placeholder.Line length="short" />
+              <Placeholder.Line length='full' />
+              <Placeholder.Line length='short' />
             </Placeholder.Paragraph>
             {image && <Placeholder.Paragraph />}
             {image && <Placeholder.Image rectangular />}
@@ -34,6 +34,6 @@ export default class EmptyFeedCard extends React.Component {
           </Placeholder>
         </Card.Content>
       </Card>
-    );
+    )
   }
 }

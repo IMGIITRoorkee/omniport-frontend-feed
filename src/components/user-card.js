@@ -1,11 +1,11 @@
-import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
-import '../css/bday-card.css';
-import { isMobile, isBrowser } from 'react-device-detect';
-import { createImageFromInitials } from '../utils';
+import React from 'react'
+import { Card, Icon, Image } from 'semantic-ui-react'
+import '../css/bday-card.css'
+import { isBrowser } from 'react-device-detect'
+import { createImageFromInitials } from '../utils'
+import { getThemeObject } from 'formula_one'
 
-
-const UserCard = (props) => (
+const UserCard = props => (
   <Card styleName={isBrowser ? 'user-card' : 'user-card2'}>
     {props.displayPicture ? (
       <Image
@@ -19,7 +19,7 @@ const UserCard = (props) => (
       />
     ) : (
       <Image
-        src={createImageFromInitials(128, props.name, '#6435C9')}
+        src={createImageFromInitials(128, props.name, '#ffffff')}
         avatar
         ui={false}
         style={{
@@ -32,6 +32,6 @@ const UserCard = (props) => (
       {props.name}
     </Card.Content>
   </Card>
-);
+)
 
-export default UserCard;
+export default UserCard
