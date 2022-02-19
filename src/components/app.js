@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { initialiseList, getMoreFeed , getPersonalDetails} from '../actions'
+import { initialiseList, getMoreFeed, getPersonalDetails } from '../actions'
 import AppContainer from './app-container'
 import BirthdayAccordion from './birthday-accordian'
 
 import main from 'formula_one/src/css/app.css'
 
 class App extends React.PureComponent {
-  componentDidMount () {
+  componentDidMount() {
     this.props.InitialiseList()
-    this.props.PersonalDetails()
   }
 
   handleScroll = (values, forceLoad = false) => {
@@ -26,17 +25,18 @@ class App extends React.PureComponent {
       }
     }
   }
-
-  render () { 
-    const { personalDetails } = this.props
+  isStudent() {
+    return store
+      .getState()
+      .user.details.profile.roles.some(role => role.role === 'Student')
+  }
+  render() {
     return (
       <Scrollbars autoHide onScrollFrame={this.handleScroll}>
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
-            {personalDetails.details && personalDetails.details.student &&
-            <BirthdayAccordion/>
-  }
+            {this.isStudent() && <BirthdayAccordion />}
             <AppContainer handleScroll={this.handleScroll} />
           </Container>
         </Container>
@@ -45,11 +45,9 @@ class App extends React.PureComponent {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    personalDetails : state.personalDetails,
     feedList: state.feedList,
-    
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -60,9 +58,6 @@ const mapDispatchToProps = dispatch => {
     GetMoreFeed: page => {
       dispatch(getMoreFeed(page))
     },
-    PersonalDetails : ()=>{
-      dispatch(getPersonalDetails())
-    }
   }
 }
 

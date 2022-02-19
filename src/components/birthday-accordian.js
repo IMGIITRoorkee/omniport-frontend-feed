@@ -1,10 +1,11 @@
 import React from 'react'
 import { Accordion, Icon } from 'semantic-ui-react'
 import { Button, Divider } from 'semantic-ui-react'
-import CardCarousel from './card-carousel'
-import { getBdays } from '../actions'
 import { connect } from 'react-redux'
 import { isMobile, isBrowser } from 'react-device-detect'
+import { getTheme } from 'formula_one'
+import CardCarousel from './card-carousel'
+import { getBdays, getPersonalDetails } from '../actions'
 import '../css/bday-card.css'
 import {
   filterBatch,
@@ -14,6 +15,7 @@ import {
 } from '../filterFunctions'
 import CardExpand from './card-expanding-list'
 import { CONTENT_OF_DAY, CONTENT_OF_FILTERS } from '../constants'
+
 
 class BirthdayAccordion extends React.Component {
   state = {
@@ -31,6 +33,7 @@ class BirthdayAccordion extends React.Component {
   }
   componentWillMount() {
     this.props.BdayList(this.state.day)
+    this.props.PersonalDetails()
   }
 
   filterList(list, details, newList, filters) {
@@ -112,7 +115,6 @@ class BirthdayAccordion extends React.Component {
   render() {
     const { open } = this.state
     const { bdayList } = this.props
-    const { personalDetails } = this.props
     return (
       <Accordion vertical styleName={isBrowser ? 'accordion' : 'accordion2'}>
         {isBrowser && (
@@ -121,15 +123,16 @@ class BirthdayAccordion extends React.Component {
               active={open === 0}
               index={0}
               onClick={this.handleClick}
+              style={{ margin: 0 }}
             >
               <div styleName='acc-title'>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <img
-                    src='/branding/site/giftbox.svg'
+                    src='/static/feed/assets/giftbox.svg'
                     style={{
-                      marginRight: '14px',
-                      height: '40px',
-                      width: '40px',
+                      marginRight: '1.2rem',
+                      height: '1.8em',
+                      width: '1.8em',
                     }}
                   />
                   Birthdays
@@ -139,13 +142,22 @@ class BirthdayAccordion extends React.Component {
               </div>
             </Accordion.Title>
             <Accordion.Content active={open === 0}>
-              <Divider style={{ border: '1px solid #F3F4F4', height: '0px' }} />
+              <Divider
+                style={{
+                  border: '1px solid #F3F4F4',
+                  height: '0px',
+                  marginTop: 0,
+                }}
+              />
               <div styleName='btn-grp1'>
                 {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
                   <Button
                     styleName={
-                      this.state.day === day ? 'day-btn clicked' : 'day-btn'
+                      this.state.day === day
+                        ? 'day-btn'
+                        : 'day-btn standard-btn'
                     }
+                    color={this.state.day === day ? getTheme() : 'white'}
                     content={CONTENT_OF_DAY[day]}
                     onClick={() => {
                       this.changeDay(day)
@@ -155,13 +167,17 @@ class BirthdayAccordion extends React.Component {
               </div>
               <Divider style={{ border: '1px solid #F3F4F4', height: '0px' }} />
               <div styleName='btn-grp2'>
-                <div style={{ marginRight: '6px' }}>
+                <div style={{ marginRight: '0.4em' }}>
                   <Icon size='large' name='filter' />
                 </div>
                 <div styleName='filter-txt'>Filters:</div>
                 {Object.entries(this.state.filters).map(([key, value]) => (
                   <Button
-                    styleName={value ? 'filter-btn clicked' : 'filter-btn'}
+                    basic
+                    color={value ? getTheme() : 'standard'}
+                    styleName={
+                      value ? 'filter-btn' : 'filter-btn basic-standard-btn'
+                    }
                     content={CONTENT_OF_FILTERS[key]}
                     onClick={() => {
                       this.filterClick(key)
@@ -194,13 +210,13 @@ class BirthdayAccordion extends React.Component {
               onClick={this.handleClick}
             >
               <div styleName='acc-title2'>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <img
-                    src='/branding/site/giftbox.svg'
+                    src='/static/feed/assets/giftbox.svg'
                     style={{
-                      marginRight: '7px',
-                      height: '16px',
-                      width: '16px',
+                      margin: 'auto 0.5em',
+                      height: '1.5em',
+                      width: '1.5em',
                     }}
                   />
                   Birthdays
@@ -229,10 +245,14 @@ class BirthdayAccordion extends React.Component {
               <div styleName='btn-grp4'>
                 {Object.entries(this.state.filters).map(([key, value]) => (
                   <Button
-                    styleName={value ? 'filter-btn2 clicked' : 'filter-btn2'}
+                    basic
                     style={{
                       display: key === 'all' ? 'none' : 'block',
                     }}
+                    color={value ? getTheme() : 'standard'}
+                    styleName={
+                      value ? 'filter-btn2' : 'filter-btn2 basic-standard-btn2'
+                    }
                     content={CONTENT_OF_FILTERS[key]}
                     onClick={() => {
                       this.filterClick(key)
@@ -271,6 +291,9 @@ const mapDispatchToProps = dispatch => {
   return {
     BdayList: day => {
       dispatch(getBdays(day))
+    },
+    PersonalDetails: () => {
+      dispatch(getPersonalDetails())
     },
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UserCard from './user-card'
-import { Button, Divider, Input, Segment } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import '../css/bday-card.css'
 import { connect } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
@@ -19,22 +19,23 @@ class CardExpand extends Component {
   }
   render() {
     const { bdayList } = this.props
-    const { all } = this.props
     const { display } = this.props
     var newList = this.props.filteredList
 
     return (
       <div>
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+          }}
+        >
           {newList &&
             display &&
             bdayList.isLoaded &&
             newList.slice(0, this.state.visible).map(card => {
-              return (
-                <div>
-                  <UserCard name={card.person.fullName} />
-                </div>
-              )
+              return <UserCard name={card.person.fullName} />
             })}
         </div>
         <div>
@@ -55,6 +56,7 @@ class CardExpand extends Component {
             )}
           {newList &&
             this.state.visible >= newList.length &&
+            this.state.visible > 3 &&
             newList.length != 0 && (
               <Button
                 styleName='show'
