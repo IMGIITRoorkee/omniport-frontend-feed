@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 import UserCard from './user-card'
 import { Button } from 'semantic-ui-react'
-import '../css/bday-card.css'
+import '../css/birthday-card.css'
 import { connect } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 
 class CardExpand extends Component {
-  state = { expanded: false, visible: 3 }
+  state = { windowWidth: window.innerWidth, expanded: false, visible: 3 , initialVisible : 3}
   showMoreItems = () => {
     var visible = this.state.visible
-    this.setState({ visible: visible + 3 })
+    this.setState({ visible: this.props.filteredList.length })
   }
   showLessItems = () => {
-    this.setState({ visible: 3 })
+    this.setState({ visible: this.state.initialVisible })
   }
   handleExpandClick = () => {
     this.setState({ expanded: !expanded })
+  }
+  handleVisibleCards = e => {
+    this.setState({ windowWidth: window.innerWidth })
+    switch (true) {
+      case this.state.windowWidth > 650:
+        this.setState({ visible: 6 })
+        this.setState({ initialVisible: 6 })
+        break
+      case this.state.windowWidth > 535 && this.state.windowWidth < 650:
+        this.setState({ visible: 5 })
+        this.setState({ initialVisible: 5 })
+        break
+    }
+  }
+
+  componentWillMount() {
+    this.handleVisibleCards()
   }
   render() {
     const { bdayList } = this.props
@@ -56,7 +73,7 @@ class CardExpand extends Component {
             )}
           {newList &&
             this.state.visible >= newList.length &&
-            this.state.visible > 3 &&
+            this.state.visible > this.state.initialVisible &&
             newList.length != 0 && (
               <Button
                 styleName='show'

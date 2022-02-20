@@ -6,7 +6,7 @@ import { isMobile, isBrowser } from 'react-device-detect'
 import { getTheme } from 'formula_one'
 import CardCarousel from './card-carousel'
 import { getBdays, getPersonalDetails } from '../actions'
-import '../css/bday-card.css'
+import '../css/birthday-card.css'
 import {
   filterBatch,
   filterBhawan,
@@ -35,7 +35,6 @@ class BirthdayAccordion extends React.Component {
     this.props.BdayList(this.state.day)
     this.props.PersonalDetails()
   }
-
   filterList(list, details, newList, filters) {
     if (list.isLoaded) {
       newList = newList.list
@@ -115,6 +114,7 @@ class BirthdayAccordion extends React.Component {
   render() {
     const { open } = this.state
     const { bdayList } = this.props
+    console.log(this.props)
     return (
       <Accordion vertical styleName={isBrowser ? 'accordion' : 'accordion2'}>
         {isBrowser && (
@@ -130,15 +130,15 @@ class BirthdayAccordion extends React.Component {
                   <img
                     src='/static/feed/assets/giftbox.svg'
                     style={{
-                      marginRight: '1.2rem',
-                      height: '1.8em',
-                      width: '1.8em',
+                      marginRight: '1rem',
+                      height: '1.6em',
+                      width: '1.6em',
                     }}
                   />
                   Birthdays
                 </div>
 
-                <Icon name='dropdown' />
+                <Icon name='dropdown' style={{alignSelf:'center'}}/>
               </div>
             </Accordion.Title>
             <Accordion.Content active={open === 0}>
@@ -146,7 +146,7 @@ class BirthdayAccordion extends React.Component {
                 style={{
                   border: '1px solid #F3F4F4',
                   height: '0px',
-                  marginTop: 0,
+                  margin: '0 0 0.6em 0',
                 }}
               />
               <div styleName='btn-grp1'>
@@ -165,11 +165,11 @@ class BirthdayAccordion extends React.Component {
                   />
                 ))}
               </div>
-              <Divider style={{ border: '1px solid #F3F4F4', height: '0px' }} />
+              <Divider style={{ border: '1px solid #F3F4F4', height: '0px', margin: '0.6em 0 0.6em 0', }} />
               <div styleName='btn-grp2'>
-                <div style={{ marginRight: '0.4em' }}>
+                {/* <div style={{ marginRight: '0.4em' }}>
                   <Icon size='large' name='filter' />
-                </div>
+                </div> */}
                 <div styleName='filter-txt'>Filters:</div>
                 {Object.entries(this.state.filters).map(([key, value]) => (
                   <Button

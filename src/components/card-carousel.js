@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../css/bday-card.css'
+import '../css/birthday-card.css'
 import { connect } from 'react-redux'
 import Carousel from './carousel'
 

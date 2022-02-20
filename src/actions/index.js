@@ -13,7 +13,7 @@ export const initialiseList = () => {
   return dispatch => {
     dispatch({
       type: 'SET_LOADED',
-      payload: false,
+      payload: false
     })
     axios
       .get(urlFeedList())
@@ -22,14 +22,14 @@ export const initialiseList = () => {
           type: 'SET_FEED_LIST',
           payload: {
             isLoaded: true,
-            list: res.data,
-          },
+            list: res.data
+          }
         })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
-          payload: true,
+          payload: true
         })
       })
   }
@@ -38,7 +38,7 @@ export const getMoreFeed = page => {
   return dispatch => {
     dispatch({
       type: 'SET_LOADED',
-      payload: false,
+      payload: false
     })
 
     const pageUrl = new URL(page)
@@ -49,41 +49,37 @@ export const getMoreFeed = page => {
     axios
       .get(urlFeedList(), {
         params: {
-          page: pageNo,
-        },
+          page: pageNo
+        }
       })
       .then(res => {
         dispatch({
           type: 'SET_FEED_LIST_NEXT_PAGE',
           payload: {
             isLoaded: true,
-            list: res.data,
-          },
+            list: res.data
+          }
         })
       })
       .catch(() => {
         dispatch({
           type: 'SET_LOADED',
-          payload: true,
+          payload: true
         })
       })
   }
 }
 export const changeReport = (id, status) => {
   let headers = {
-    'X-CSRFToken': getCookie('csrftoken'),
+    'X-CSRFToken': getCookie('csrftoken')
   }
   return dispatch => {
-    dispatch({
-      type: 'SET_LOADED',
-      payload: false,
-    })
     axios
       .patch(urlFeedBit(id), { newReported: status }, { headers: headers })
       .then(res => {
         dispatch({
           type: 'SET_REPORTED',
-          payload: res.data,
+          payload: res.data
         })
       })
       .catch(() => {
@@ -93,7 +89,7 @@ export const changeReport = (id, status) => {
           description: 'Some error occured while reporting',
           animation: 'fade up',
           icon: 'frown up',
-          time: 3000,
+          time: 3000
         })
       })
   }
@@ -102,7 +98,7 @@ export const changeReport = (id, status) => {
 export const getBdays = day => {
   return dispatch => {
     dispatch({
-      type: 'SET_LOADED',
+      type: 'SET_BDAY_LIST_LOADED',
       payload: false,
     })
     axios
@@ -118,7 +114,7 @@ export const getBdays = day => {
       })
       .catch(() => {
         dispatch({
-          type: 'SET_LOADED',
+          type: 'SET_BDAY_LIST_LOADED',
           payload: true,
         })
       })
@@ -128,7 +124,7 @@ export const getBdays = day => {
 export const getPersonalDetails = () => {
   return dispatch => {
     dispatch({
-      type: 'SET_LOADED',
+      type: 'SET_DETAILS_LOADED',
       payload: false,
     })
     axios
@@ -144,7 +140,7 @@ export const getPersonalDetails = () => {
       })
       .catch(() => {
         dispatch({
-          type: 'SET_LOADED',
+          type: 'SET_DETAILS_LOADED',
           payload: true,
         })
       })

@@ -4,7 +4,7 @@ import { Card, Placeholder } from 'semantic-ui-react'
 import '../css/feed-card.css'
 
 export default class EmptyFeedCard extends React.Component {
-  render() {
+  render () {
     const { image } = this.props
     return (
       <Card fluid>

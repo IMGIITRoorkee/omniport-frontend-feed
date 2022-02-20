@@ -8,7 +8,7 @@ const personalDetails = (state = initialState, action) => {
     case 'SET_PERSONAL_DETAILS':
       return action.payload
 
-    case 'SET_LOADED':
+    case 'SET_DETAILS_LOADED':
       return {
         ...state,
         isLoaded: action.payload,

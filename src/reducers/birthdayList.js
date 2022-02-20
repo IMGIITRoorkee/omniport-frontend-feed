@@ -5,7 +5,7 @@ const bdayList = (state = initialState, action) => {
     case 'SET_BDAY_LIST':
       return action.payload
   
-    case 'SET_LOADED':
+    case 'SET_BDAY_LIST_LOADED':
       return {
         ...state,
         isLoaded: action.payload

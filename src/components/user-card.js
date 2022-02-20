@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
-import '../css/bday-card.css'
+import '../css/birthday-card.css'
 import { isBrowser } from 'react-device-detect'
 import { DefaultDP } from 'formula_one'
 

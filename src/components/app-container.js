@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Icon, Button, Grid } from 'semantic-ui-react'
+import { Segment, Icon, Button, Grid, } from 'semantic-ui-react'
 import { getTheme } from 'formula_one'
+
 import { isBrowser } from 'react-device-detect'
+
 import { MasonryLayout, appDetails } from 'formula_one'
 import FeedCard from './feed-card'
+
 import '../css/feed-card.css'
 import EmptyFeedCard from './emty-feed-card'
 
@@ -13,7 +16,7 @@ class AppContainer extends React.Component {
     this.props.handleScroll({}, true)
   }
 
-  render() {
+  render () {
     const { feedList } = this.props
     return (
       <div styleName='feed-container'>
@@ -72,9 +75,9 @@ class AppContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
-    feedList: state.feedList,
+    feedList: state.feedList
   }
 }
 

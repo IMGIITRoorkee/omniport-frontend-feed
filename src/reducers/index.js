@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import feedList from './feedList'
-import bdayList from './bdayList'
+import bdayList from './birthdayList'
 import personalDetails from './PersonalDetails'
 
 const rootReducers = combineReducers({

@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { Card, Image, Icon, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+
 import { getTheme, DefaultDP, appDetails } from 'formula_one'
 import { changeReport } from '../actions'
+
 import '../css/feed-card.css'
 
 class FeedCard extends React.Component {
-  render() {
+  render () {
     const { feed } = this.props
     return (
       <Card fluid color={getTheme()}>
@@ -90,7 +92,7 @@ const mapDispatchToProps = dispatch => {
   return {
     ChangeReport: (id, status) => {
       dispatch(changeReport(id, status))
-    },
+    }
   }
 }
 export default connect(null, mapDispatchToProps)(FeedCard)
