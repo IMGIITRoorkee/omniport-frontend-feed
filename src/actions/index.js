@@ -44,8 +44,6 @@ export const getMoreFeed = page => {
     const pageUrl = new URL(page)
     const pageNo = pageUrl.searchParams.get('page')
 
-    console.log(page, pageNo)
-
     axios
       .get(urlFeedList(), {
         params: {

@@ -6,34 +6,35 @@ import { connect } from 'react-redux'
 import { Icon } from 'semantic-ui-react'
 
 class CardExpand extends Component {
-  state = { windowWidth: window.innerWidth, expanded: false, visible: 3 , initialVisible : 3}
+  state = { windowWidth: window.innerWidth, expanded: false, visible: 3, initialVisible: 3 }
+
   showMoreItems = () => {
     var visible = this.state.visible
     this.setState({ visible: this.props.filteredList.length })
   }
+
   showLessItems = () => {
     this.setState({ visible: this.state.initialVisible })
   }
+
   handleExpandClick = () => {
     this.setState({ expanded: !expanded })
   }
+
   handleVisibleCards = e => {
     this.setState({ windowWidth: window.innerWidth })
-    switch (true) {
-      case this.state.windowWidth > 650:
-        this.setState({ visible: 6 })
-        this.setState({ initialVisible: 6 })
-        break
-      case this.state.windowWidth > 535 && this.state.windowWidth < 650:
-        this.setState({ visible: 5 })
-        this.setState({ initialVisible: 5 })
-        break
-    }
+    const width = this.containerDivRef ? this.containerDivRef.clientWidth : 0
+
+    let visibleSlides = Math.max(Math.floor(width / 80), 1)
+    visibleSlides = Math.min(visibleSlides, this.props.filteredList.length)
+    this.setState({ visible: visibleSlides })
+    this.setState({ initialVisible: visibleSlides })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleVisibleCards()
   }
+
   render() {
     const { bdayList } = this.props
     const { display } = this.props
@@ -47,12 +48,21 @@ class CardExpand extends Component {
             flexWrap: 'wrap',
             justifyContent: 'space-around',
           }}
+          ref={containerDivRef => {
+            this.containerDivRef = containerDivRef
+          }}
         >
           {newList &&
             display &&
             bdayList.isLoaded &&
             newList.slice(0, this.state.visible).map(card => {
-              return <UserCard name={card.person.fullName} />
+              return (
+                <UserCard
+                  name={card.person.fullName}
+                  displayPicture={card.person.displayPicture}
+                  student={card.person.student}
+                />
+              )
             })}
         </div>
         <div>
@@ -88,7 +98,10 @@ class CardExpand extends Component {
               </Button>
             )}
           {newList && newList.length == 0 && (
-            <div styleName='remark2'>No Birthdays Found!</div>
+            <div styleName='remark'>
+              <Icon name='frown outline' />
+              No Birthdays Found!
+            </div>
           )}
         </div>
       </div>

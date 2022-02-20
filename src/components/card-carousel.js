@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import '../css/birthday-card.css'
 import { connect } from 'react-redux'
-import Carousel from './carousel'
+import { Icon } from 'semantic-ui-react'
 
+import Carousel from './carousel'
+import '../css/birthday-card.css'
 
 class CardCarousel extends Component {
   render() {
@@ -17,7 +18,10 @@ class CardCarousel extends Component {
         )}
 
         {bdayList.isLoaded && newList.length == 0 && (
-          <div styleName='remark'>No Birthdays Found!</div>
+          <div styleName='remark'>
+            <Icon name='frown outline' />
+            No Birthdays Found!
+          </div>
         )}
       </div>
     )

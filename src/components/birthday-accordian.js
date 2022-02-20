@@ -1,20 +1,27 @@
 import React from 'react'
-import { Accordion, Icon } from 'semantic-ui-react'
-import { Button, Divider } from 'semantic-ui-react'
+import {
+  Button,
+  Divider,
+  Accordion,
+  Icon,
+  Card,
+} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { isMobile, isBrowser } from 'react-device-detect'
 import { getTheme } from 'formula_one'
+
 import CardCarousel from './card-carousel'
 import { getBdays, getPersonalDetails } from '../actions'
-import '../css/birthday-card.css'
 import {
   filterBatch,
   filterBhawan,
   filterGroup,
   filterYear,
 } from '../filterFunctions'
-import CardExpand from './card-expanding-list'
+import '../css/birthday-card.css'
 import { CONTENT_OF_DAY, CONTENT_OF_FILTERS } from '../constants'
+
+import CardExpand from './card-expanding-list'
 
 
 class BirthdayAccordion extends React.Component {
@@ -114,168 +121,171 @@ class BirthdayAccordion extends React.Component {
   render() {
     const { open } = this.state
     const { bdayList } = this.props
-    console.log(this.props)
     return (
-      <Accordion vertical styleName={isBrowser ? 'accordion' : 'accordion2'}>
-        {isBrowser && (
-          <>
-            <Accordion.Title
-              active={open === 0}
-              index={0}
-              onClick={this.handleClick}
-              style={{ margin: 0 }}
-            >
-              <div styleName='acc-title'>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img
-                    src='/static/feed/assets/giftbox.svg'
-                    style={{
-                      marginRight: '1rem',
-                      height: '1.6em',
-                      width: '1.6em',
-                    }}
-                  />
-                  Birthdays
-                </div>
+      <Card fluid color={getTheme()} styleName='birthday-card'>
+        <Card.Content>
+          <Accordion vertical>
+            {isBrowser && (
+              <>
+                <Accordion.Title
+                  active={open === 0}
+                  index={0}
+                  onClick={this.handleClick}
+                  style={{ margin: 0 }}
+                >
+                  <div styleName='accordion-title'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <img
+                        src='/static/feed/assets/giftbox.svg'
+                        style={{
+                          marginRight: '1rem',
+                          height: '1.6em',
+                        }}
+                      />
+                      Birthdays
+                    </div>
 
-                <Icon name='dropdown' style={{alignSelf:'center'}}/>
-              </div>
-            </Accordion.Title>
-            <Accordion.Content active={open === 0}>
-              <Divider
-                style={{
-                  border: '1px solid #F3F4F4',
-                  height: '0px',
-                  margin: '0 0 0.6em 0',
-                }}
-              />
-              <div styleName='btn-grp1'>
-                {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
-                  <Button
-                    styleName={
-                      this.state.day === day
-                        ? 'day-btn'
-                        : 'day-btn standard-btn'
-                    }
-                    color={this.state.day === day ? getTheme() : 'white'}
-                    content={CONTENT_OF_DAY[day]}
-                    onClick={() => {
-                      this.changeDay(day)
-                    }}
-                  />
-                ))}
-              </div>
-              <Divider style={{ border: '1px solid #F3F4F4', height: '0px', margin: '0.6em 0 0.6em 0', }} />
-              <div styleName='btn-grp2'>
-                {/* <div style={{ marginRight: '0.4em' }}>
-                  <Icon size='large' name='filter' />
-                </div> */}
-                <div styleName='filter-txt'>Filters:</div>
-                {Object.entries(this.state.filters).map(([key, value]) => (
-                  <Button
-                    basic
-                    color={value ? getTheme() : 'standard'}
-                    styleName={
-                      value ? 'filter-btn' : 'filter-btn basic-standard-btn'
-                    }
-                    content={CONTENT_OF_FILTERS[key]}
-                    onClick={() => {
-                      this.filterClick(key)
-                    }}
-                  />
-                ))}
-              </div>
-
-              <div>
-                {this.props.personalDetails.details.id && (
-                  <CardCarousel
-                    filteredList={
-                      this.state.filters.all
-                        ? bdayList.list
-                        : this.state.filteredList
-                    }
-                    display={this.state.display}
-                  />
-                )}
-              </div>
-            </Accordion.Content>
-          </>
-        )}
-
-        {isMobile && (
-          <>
-            <Accordion.Title
-              active={open === 0}
-              index={0}
-              onClick={this.handleClick}
-            >
-              <div styleName='acc-title2'>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <img
-                    src='/static/feed/assets/giftbox.svg'
-                    style={{
-                      margin: 'auto 0.5em',
-                      height: '1.5em',
-                      width: '1.5em',
-                    }}
-                  />
-                  Birthdays
-                </div>
-
-                <Icon name='dropdown' />
-              </div>
-            </Accordion.Title>
-            <Accordion.Content active={open === 0}>
-              <div styleName='btn-grp3'>
-                {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
-                  <div styleName='btn-container'>
-                    <Button
-                      styleName={
-                        this.state.day === day ? 'day-btn2 clicked' : 'day-btn2'
-                      }
-                      content={CONTENT_OF_DAY[day]}
-                      onClick={() => {
-                        this.changeDay(day)
-                      }}
-                    />
+                    <Icon name='dropdown' style={{ alignSelf: 'center' }} />
                   </div>
-                ))}
-              </div>
+                </Accordion.Title>
 
-              <div styleName='btn-grp4'>
-                {Object.entries(this.state.filters).map(([key, value]) => (
-                  <Button
-                    basic
-                    style={{
-                      display: key === 'all' ? 'none' : 'block',
-                    }}
-                    color={value ? getTheme() : 'standard'}
-                    styleName={
-                      value ? 'filter-btn2' : 'filter-btn2 basic-standard-btn2'
-                    }
-                    content={CONTENT_OF_FILTERS[key]}
-                    onClick={() => {
-                      this.filterClick(key)
-                    }}
-                  />
-                ))}
-              </div>
-              <div>
-                {this.props.personalDetails.details.id && (
-                  <CardExpand
-                    filteredList={
-                      this.state.filters.all
-                        ? bdayList.list
-                        : this.state.filteredList
-                    }
-                    display={this.state.display}
-                  />
-                )}
-              </div>
-            </Accordion.Content>
-          </>
-        )}
-      </Accordion>
+                <Accordion.Content
+                  styleName='accordion-content'
+                  active={open === 0}
+                >
+                  <Divider fitted />
+
+                  <div styleName='day-button-group'>
+                    {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
+                      <Button
+                        styleName={
+                          this.state.day === day
+                            ? 'day-btn'
+                            : 'day-btn standard-btn'
+                        }
+                        color={this.state.day === day ? getTheme() : 'white'}
+                        content={CONTENT_OF_DAY[day]}
+                        onClick={() => {
+                          this.changeDay(day)
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <Divider fitted />
+
+                  <div styleName='filter-button-group'>
+                    <Card.Header styleName='filter-txt'>
+                      <Icon name='filter' />
+                      Filters:
+                    </Card.Header>
+                    {Object.entries(this.state.filters).map(([key, value]) => (
+                      <Button
+                        basic
+                        color={value ? getTheme() : 'standard'}
+                        styleName={
+                          value ? 'filter-btn' : 'filter-btn basic-standard-btn'
+                        }
+                        content={CONTENT_OF_FILTERS[key]}
+                        icon={value ? 'check circle outline' : false}
+                        onClick={() => {
+                          this.filterClick(key)
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <div>
+                    {this.props.personalDetails.details.id && (
+                      <CardCarousel
+                        filteredList={
+                          this.state.filters.all
+                            ? bdayList.list
+                            : this.state.filteredList
+                        }
+                        display={this.state.display}
+                      />
+                    )}
+                  </div>
+                </Accordion.Content>
+              </>
+            )}
+
+            {isMobile && (
+              <>
+                <Accordion.Title
+                  active={open === 0}
+                  index={0}
+                  onClick={this.handleClick}
+                >
+                  <div styleName='accordion-title-mobile'>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <img
+                        src='/static/feed/assets/giftbox.svg'
+                        style={{
+                          margin: 'auto 0.5em',
+                          height: '1.5em',
+                        }}
+                      />
+                      Birthdays
+                    </div>
+
+                    <Icon name='dropdown' />
+                  </div>
+                </Accordion.Title>
+                <Accordion.Content active={open === 0}>
+                  <div styleName='btn-grp3'>
+                    {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
+                      <div styleName='btn-container'>
+                        <Button
+                          styleName={
+                            this.state.day === day ? 'day-button-mobile clicked' : 'day-button-mobile'
+                          }
+                          content={CONTENT_OF_DAY[day]}
+                          onClick={() => {
+                            this.changeDay(day)
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div styleName='filter-button-container-mobile'>
+                    {Object.entries(this.state.filters).map(([key, value]) => (
+                      <Button
+                        basic
+                        style={{
+                          display: key === 'all' ? 'none' : 'block',
+                        }}
+                        color={value ? getTheme() : 'standard'}
+                        styleName={
+                          value ? 'filter-button-mobile' : 'filter-button-mobile basic-standard-btn2'
+                        }
+                        content={CONTENT_OF_FILTERS[key]}
+                        onClick={() => {
+                          this.filterClick(key)
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <div>
+                    {this.props.personalDetails.details.id && (
+                      <CardExpand
+                        filteredList={
+                          this.state.filters.all
+                            ? bdayList.list
+                            : this.state.filteredList
+                        }
+                        display={this.state.display}
+                      />
+                    )}
+                  </div>
+                </Accordion.Content>
+              </>
+            )}
+          </Accordion>
+        </Card.Content>
+      </Card>
     )
   }
 }
