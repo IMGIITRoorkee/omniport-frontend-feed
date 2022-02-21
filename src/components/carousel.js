@@ -89,7 +89,7 @@ export default class Carousel extends React.Component {
                   index={index}
                   style={{
                     width: '9rem',
-                    height: '11rem',
+                    height: '13rem',
                     marginLeft: '0.5rem',
                     marginRight: '1rem',
                   }}
