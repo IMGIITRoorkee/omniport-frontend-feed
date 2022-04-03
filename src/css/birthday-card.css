@@ -1,3 +1,4 @@
+::-webkit-scrollbar {display:none;}
 .birthday-card {
     width: 90% !important;
     margin: 0 auto !important;
@@ -74,16 +75,16 @@
 }
 
 .user-card {
-    height: 12em !important;
+    height: 12.3em !important;
     width: 9em !important;
     margin-right: 0.8rem !important;
     margin-top: 3px !important;
 }
 
 .user-card-mobile {
-    height: 7em !important;
+    height: 7.6em !important;
     width: 5.5em !important;
-    margin: 0.6rem 0.1rem !important;
+    margin: 0.6rem 0.4rem !important;
     border-radius: 4px;
 }
 
@@ -104,7 +105,7 @@
 
 .card-font-mobile {
     font-weight: 600 !important;
-    line-height: 7px !important;
+    line-height: 10px !important;
     font-size: 0.6em !important;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -130,7 +131,7 @@
     justify-content: flex-end;
     align-items: center;
     background: #FFFFFF !important;
-    width: 33% !important;
+    width: 50% !important;
     height: 2.5em;
     box-sizing: border-box !important;
     border-top: 0.2px solid #E7E7E7;
@@ -144,7 +145,7 @@
     height: 100%;
     font-style: normal !important;
     font-weight: 300 !important;
-    font-size: 0.7em !important;
+    font-size: 0.9em !important;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -176,21 +177,23 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-top: 0.6rem;
-    margin-bottom: 0.6rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     align-items: center;
-
+    overflow: auto;
 }
 
 .filter-button-mobile {
     box-sizing: border-box !important;
     border-radius: 1.2em !important;
     font-style: normal !important;
-    font-weight: 550 !important;
+    font-weight: 450 !important;
     font-size: 0.6em !important;
     line-height: 1.5em !important;
     text-align: center !important;
-    padding: 0.5em !important;
+    padding: 0.6em !important;
+    white-space: nowrap;
+    margin-right: 0.1rem !important;
 }
 
 .filter-button-mobile.clicked {
@@ -198,7 +201,7 @@
     box-sizing: border-box !important;
     border-radius: 1.2em !important;
     font-style: normal !important;
-    font-weight: 550 !important;
+    font-weight: 450 !important;
     line-height: 1.5em !important;
     text-align: center !important;
 }
@@ -225,7 +228,7 @@
 .remark {
     line-height: 2rem;
     color: #999999;
-    width: 100%;
+    width: 100% !important;
     text-align: center;
 }
 
@@ -240,4 +243,10 @@
 
 .carousel {
     width: 100% !important;
+}
+.carousel-mobile {
+    width: 100% !important;
+    display: flex !important;
+    max-height: 11rem !important;
+    overflow-x: scroll;
 }

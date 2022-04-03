@@ -51,10 +51,11 @@ export default class Carousel extends React.Component {
         naturalSlideHeight={100}
         totalSlides={newList.length}
         visibleSlides={this.state.visibleSlides}
-        style={{ width: '100%', display: 'flex', height: '14rem' }}
+        style={{ width: '100%', display: 'flex',}}
         touchEnabled={false}
         dragEnabled={false}
       >
+        
         <ButtonBack
           style={{
             alignSelf: 'center',
@@ -81,6 +82,7 @@ export default class Carousel extends React.Component {
             style={{
               width: '100%',
               margin: '0 1rem',
+              height : '100%',
             }}
           >
             {newList.map((card, index) => {
@@ -89,7 +91,8 @@ export default class Carousel extends React.Component {
                   index={index}
                   style={{
                     width: '9rem',
-                    height: '13rem',
+                    height: '100%',
+                    margin: 'auto',
                     marginLeft: '0.5rem',
                     marginRight: '1rem',
                   }}
@@ -98,13 +101,14 @@ export default class Carousel extends React.Component {
                     name={card.person.fullName}
                     displayPicture={card.person.displayPicture}
                     student={card.person.student}
+                    style={{margin: 'auto', height:'100%'}}
                   />
                 </Slide>
               )
             })}
           </Slider>
         </div>
-
+      
         <ButtonNext
           style={{
             JustifySelf: 'flex-end',

@@ -21,8 +21,6 @@ import {
 import '../css/birthday-card.css'
 import { CONTENT_OF_DAY, CONTENT_OF_FILTERS } from '../constants'
 
-import CardExpand from './card-expanding-list'
-
 
 class BirthdayAccordion extends React.Component {
   state = {
@@ -123,7 +121,7 @@ class BirthdayAccordion extends React.Component {
     const { bdayList } = this.props
     return (
       <Card fluid color={getTheme()} styleName='birthday-card'>
-        <Card.Content>
+        <Card.Content style={{padding: isBrowser?'14px': '6px'}}>
           <Accordion vertical>
             {isBrowser && (
               <>
@@ -235,7 +233,7 @@ class BirthdayAccordion extends React.Component {
                 </Accordion.Title>
                 <Accordion.Content active={open === 0}>
                   <div styleName='btn-grp3'>
-                    {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
+                    {['today', 'tomorrow'].map(day => (
                       <div styleName='btn-container'>
                         <Button
                           styleName={
@@ -250,31 +248,11 @@ class BirthdayAccordion extends React.Component {
                     ))}
                   </div>
 
-                  <div styleName='filter-button-container-mobile'>
-                    {Object.entries(this.state.filters).map(([key, value]) => (
-                      <Button
-                        basic
-                        style={{
-                          display: key === 'all' ? 'none' : 'block',
-                        }}
-                        color={value ? getTheme() : 'standard'}
-                        styleName={
-                          value ? 'filter-button-mobile' : 'filter-button-mobile basic-standard-btn2'
-                        }
-                        content={CONTENT_OF_FILTERS[key]}
-                        onClick={() => {
-                          this.filterClick(key)
-                        }}
-                      />
-                    ))}
-                  </div>
                   <div>
                     {this.props.personalDetails.details.id && (
-                      <CardExpand
+                      <CardCarousel
                         filteredList={
-                          this.state.filters.all
-                            ? bdayList.list
-                            : this.state.filteredList
+                          bdayList.list
                         }
                         display={this.state.display}
                       />
