@@ -23,6 +23,10 @@ const UserCard = props => (
         name={props.name}
         dualInitials={true}
         size={isBrowser ? '4rem' : '3rem'}
+        style={{
+          height: isBrowser ? '128px' : '69px',
+          width: '100%'
+        }}
       />
     )}
     <Card.Content styleName='card-font-container'>

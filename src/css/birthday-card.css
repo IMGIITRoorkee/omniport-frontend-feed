@@ -82,8 +82,8 @@
 }
 
 .user-card-mobile {
-    height: 8.3em !important;
-    width: 6.3em !important;
+    height: 8.3rem !important;
+    min-width: 6.3rem !important;
     margin: 0.6rem 0.4rem !important;
     border-radius: 5px;
 }
@@ -97,7 +97,7 @@
 
 .card-font {
     text-align: center;
-    font-size: 0.8em !important;
+    font-size: 0.85em !important;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -106,7 +106,7 @@
 .card-font-mobile {
     font-weight: 600 !important;
     line-height: 10px !important;
-    font-size: 0.6em !important;
+    font-size: 0.7em !important;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
