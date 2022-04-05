@@ -82,10 +82,10 @@
 }
 
 .user-card-mobile {
-    height: 7.6em !important;
-    width: 5.5em !important;
+    height: 8.3em !important;
+    width: 6.3em !important;
     margin: 0.6rem 0.4rem !important;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
 .card-font-container {
@@ -165,6 +165,7 @@
 .accordion-title-mobile {
     font-style: normal;
     font-weight: bold;
+    font-size: 1.1em !important;
     line-height: 1em;
     color: #000000;
     display: flex;
@@ -247,6 +248,7 @@
 .carousel-mobile {
     width: 100% !important;
     display: flex !important;
+    white-space: nowrap;
     max-height: 11rem !important;
     overflow-x: scroll;
 }
