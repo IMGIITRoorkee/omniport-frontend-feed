@@ -14,7 +14,7 @@ class CardCarousel extends Component {
     var newList = this.props.filteredList
 
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' , height: '12.5em',maxHeight:'15em'}}>
         {display && bdayList.isLoaded && newList && newList.length != 0 && isBrowser && (
           <Carousel newList={newList} styleName='carousel' />
         )}

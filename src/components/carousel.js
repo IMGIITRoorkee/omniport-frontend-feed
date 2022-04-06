@@ -51,7 +51,7 @@ export default class Carousel extends React.Component {
         naturalSlideHeight={100}
         totalSlides={newList.length}
         visibleSlides={this.state.visibleSlides}
-        style={{ width: '100%', display: 'flex',}}
+        style={{ width: '100%', display: 'flex',maxHeight:'100%'}}
         touchEnabled={false}
         dragEnabled={false}
       >
@@ -101,7 +101,7 @@ export default class Carousel extends React.Component {
                     name={card.person.fullName}
                     displayPicture={card.person.displayPicture}
                     student={card.person.student}
-                    style={{margin: 'auto', height:'100%'}}
+                    style={{margin: 'auto', height: '100%'}}
                   />
                 </Slide>
               )

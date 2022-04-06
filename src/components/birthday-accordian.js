@@ -24,7 +24,7 @@ import { CONTENT_OF_DAY, CONTENT_OF_FILTERS } from '../constants'
 
 class BirthdayAccordion extends React.Component {
   state = {
-    open: 0,
+    open: -1,
     day: 'today',
     filters: {
       all: true,
@@ -126,7 +126,7 @@ class BirthdayAccordion extends React.Component {
             {isBrowser && (
               <>
                 <Accordion.Title
-                  active={open === 0}
+                  active={open===0}
                   index={0}
                   onClick={this.handleClick}
                   style={{ margin: 0 }}
@@ -142,7 +142,6 @@ class BirthdayAccordion extends React.Component {
                       />
                       Birthdays
                     </div>
-
                     <Icon name='dropdown' style={{ alignSelf: 'center' }} />
                   </div>
                 </Accordion.Title>
