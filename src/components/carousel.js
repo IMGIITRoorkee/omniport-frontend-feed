@@ -83,6 +83,7 @@ export default class Carousel extends React.Component {
               width: '100%',
               margin: '0 1rem',
               height : '100%',
+              maxHeight: '100%'
             }}
           >
             {newList.map((card, index) => {
@@ -95,6 +96,8 @@ export default class Carousel extends React.Component {
                     margin: 'auto',
                     marginLeft: '0.5rem',
                     marginRight: '1rem',
+                    boxSizing: 'inherit',
+                    paddingBottom:'13em'
                   }}
                 >
                   <UserCard
