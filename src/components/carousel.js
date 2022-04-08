@@ -24,9 +24,11 @@ export default class Carousel extends React.Component {
     const width = this.carouselSliderElement ? this.carouselSliderElement.clientWidth : 0
 
     var visibleSlides = Math.max(Math.floor(width / 150), 1)
+    console.log(visibleSlides, Math.floor(width / 150))
     visibleSlides = Math.min(visibleSlides, this.props.newList.length)
+    console.log(visibleSlides)
     this.setState({ visibleSlides })
-
+    console.log(visibleSlides, this.state.visibleSlides,this.state.windowWidth, this.props.newList.length)
     return visibleSlides
   }
 

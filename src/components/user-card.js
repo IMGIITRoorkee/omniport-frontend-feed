@@ -14,7 +14,7 @@ const UserCard = props => (
         avatar
         ui={false}
         style={{
-          height: isBrowser ? '128px' : '69px',
+          height: isBrowser ? '128px' : '6.2rem',
           width: '100%',
         }}
       />
