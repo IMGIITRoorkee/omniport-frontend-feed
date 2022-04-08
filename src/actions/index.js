@@ -106,7 +106,7 @@ export const getBdays = day => {
           type: 'SET_BDAY_LIST',
           payload: {
             isLoaded: true,
-            list: res.data.results,
+            list: res.data,
           },
         })
       })
