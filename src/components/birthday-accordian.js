@@ -35,11 +35,27 @@ class BirthdayAccordion extends React.Component {
     },
     filteredList: [],
     display: true,
+    width: 0
   }
+  handleResize = e => {
+    var width = this.accordionElement ? this.accordionElement.clientWidth : 0
+    this.setState({width: Math.max(width-84,0)})
+  }
+
   componentWillMount() {
     this.props.BdayList(this.state.day)
     this.props.PersonalDetails()
+    this.handleResize()
   }
+  componentDidMount(){
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+    
+  }
+  componentWillUnMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
   filterList(list, details, newList, filters) {
     if (list.isLoaded) {
       newList = newList.list
@@ -131,7 +147,11 @@ class BirthdayAccordion extends React.Component {
                   onClick={this.handleClick}
                   style={{ margin: 0 }}
                 >
-                  <div styleName='accordion-title'>
+                  <div styleName='accordion-title'
+                  ref={accordionElement => {
+                    this.accordionElement = accordionElement
+                  }}
+                  >
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <img
                         src='/static/feed/assets/giftbox.svg'
@@ -151,8 +171,7 @@ class BirthdayAccordion extends React.Component {
                   active={open === 0}
                 >
                   <Divider fitted />
-
-                  <div styleName='day-button-group'>
+                  <div styleName='day-button-group' >
                     {['today', 'tomorrow', 'day-after-tomorrow'].map(day => (
                       <Button
                         styleName={
@@ -201,6 +220,8 @@ class BirthdayAccordion extends React.Component {
                             : this.state.filteredList
                         }
                         display={this.state.display}
+                        opened={open}
+                        width={this.accordionElement? this.state.width:0}
                       />
                     )}
                   </div>
