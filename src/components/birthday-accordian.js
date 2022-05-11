@@ -162,7 +162,7 @@ class BirthdayAccordion extends React.Component {
                       />
                       Birthdays
                     </div>
-                    <Icon name='dropdown' style={{ alignSelf: 'center' }} />
+                    {open===0? <Icon name='angle up' style={{ alignSelf: 'center'}} /> : <Icon name='angle down' style={{ alignSelf: 'center'}} />}
                   </div>
                 </Accordion.Title>
 
