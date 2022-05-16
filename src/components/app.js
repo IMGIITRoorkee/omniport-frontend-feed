@@ -2,17 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Container } from 'semantic-ui-react'
-
 import CustomBreadcrumb from 'core/common/src/components/custom-breadcrumb'
-import { initialiseList, getMoreFeed } from '../actions'
+import { initialiseList, getMoreFeed, getPersonalDetails } from '../actions'
 import AppContainer from './app-container'
+import BirthdayAccordion from './birthday-accordian'
 
 import main from 'formula_one/src/css/app.css'
 
 class App extends React.PureComponent {
-  componentDidMount () {
+  componentDidMount() {
     this.props.InitialiseList()
   }
+
   handleScroll = (values, forceLoad = false) => {
     const { feedList } = this.props
     if (feedList.isLoaded) {
@@ -24,12 +25,18 @@ class App extends React.PureComponent {
       }
     }
   }
-  render () {
+  isStudent() {
+    return store
+      .getState()
+      .user.details.profile.roles.some(role => role.role === 'Student')
+  }
+  render() {
     return (
       <Scrollbars autoHide onScrollFrame={this.handleScroll}>
         <Container>
           <CustomBreadcrumb list={[{ name: 'Feed' }]} />
           <Container textAlign='center'>
+            {this.isStudent() && <BirthdayAccordion />}
             <AppContainer handleScroll={this.handleScroll} />
           </Container>
         </Container>
@@ -38,9 +45,9 @@ class App extends React.PureComponent {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
-    feedList: state.feedList
+    feedList: state.feedList,
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -50,7 +57,7 @@ const mapDispatchToProps = dispatch => {
     },
     GetMoreFeed: page => {
       dispatch(getMoreFeed(page))
-    }
+    },
   }
 }
 

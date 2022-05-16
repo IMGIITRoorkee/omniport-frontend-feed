@@ -1,0 +1,257 @@
+::-webkit-scrollbar {display:none;}
+.birthday-card {
+    width: 90% !important;
+    margin: 0 auto !important;
+}
+
+.accordion-title {
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.accordion-content {
+    padding: 0 !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.day-btn {
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box !important;
+    border-radius: 1.8em !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 0.8em !important;
+    line-height: 1em !important;
+    text-align: center !important;
+}
+
+.standard-btn {
+    background: #FFFFFF !important;
+    color: #454545 !important;
+}
+
+.day-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.filter-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 1rem 0;
+    align-items: center;
+    overflow: auto;
+}
+
+.filter-txt {
+    margin-right: 0.8rem !important;
+    white-space: nowrap;
+}
+
+.filter-btn {
+    box-sizing: border-box !important;
+    border-radius: 6px !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 0.8em !important;
+    text-align: center !important;
+    padding: 1em !important;
+    white-space: nowrap;
+}
+
+.basic-standard-btn {
+    background: #FFFFFF !important;
+    color: #454545 !important;
+}
+
+.user-card {
+    height: 12em !important;
+    width: 9em !important;
+    margin-right: 0.8rem !important;
+    margin-top: 3px !important;
+}
+
+.user-card-mobile {
+    height: 8.3rem !important;
+    min-width: 6.3rem !important;
+    margin: 0.6rem 0.4rem !important;
+    border-radius: 5px;
+}
+
+.card-font-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.7rem !important;
+}
+
+.card-font {
+    text-align: center;
+    font-size: 0.85em !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-font-mobile {
+    font-weight: 600 !important;
+    line-height: 10px !important;
+    font-size: 0.7em !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.container {
+    padding: 40px;
+    background: #419be0 !important;
+}
+
+
+.btn-grp3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: #FFFFFF !important;
+    width: 50% !important;
+    height: 2.5em;
+    box-sizing: border-box !important;
+    border-top: 0.2px solid #E7E7E7;
+    border-bottom: 0.2px solid #E7E7E7;
+
+}
+
+.day-button-mobile {
+    background: #FFFFFF !important;
+    width: 100% !important;
+    height: 100%;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    font-size: 0.9em !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center !important;
+    bottom: 0px !important;
+    padding: 0px !important;
+}
+
+.day-button-mobile.clicked {
+    background: #FFFFFF !important;
+    color: #4d4b4b !important;
+    border-bottom: 1px solid #4d4b4b !important;
+    border-radius: 0px;
+    padding: 0px !important;
+}
+
+.accordion-title-mobile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.1em !important;
+    line-height: 1em;
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-button-container-mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    align-items: center;
+    overflow: auto;
+}
+
+.filter-button-mobile {
+    box-sizing: border-box !important;
+    border-radius: 1.2em !important;
+    font-style: normal !important;
+    font-weight: 450 !important;
+    font-size: 0.6em !important;
+    line-height: 1.5em !important;
+    text-align: center !important;
+    padding: 0.6em !important;
+    white-space: nowrap;
+    margin-right: 0.1rem !important;
+}
+
+.filter-button-mobile.clicked {
+    border: 1px solid !important;
+    box-sizing: border-box !important;
+    border-radius: 1.2em !important;
+    font-style: normal !important;
+    font-weight: 450 !important;
+    line-height: 1.5em !important;
+    text-align: center !important;
+}
+
+.basic-standard-btn2 {
+    background: #FFFFFF !important;
+    color: #454545 !important;
+}
+
+.show {
+    display: flex;
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 0.5em !important;
+    line-height: 0.7em;
+    color: #000000 !important;
+    background: #FFFFFF !important;
+    border: 1px solid #D4D4D5 !important;
+    box-sizing: border-box;
+    border-radius: 1.5em !important;
+    width: 60% !important;
+}
+
+.remark {
+    line-height: 2rem;
+    color: #999999;
+    width: 100% !important;
+    text-align: center;
+}
+
+.remark2 {
+    font-style: normal !important;
+    font-weight: normal !important;
+    line-height: 2em;
+    color: #999999;
+    text-align: left;
+    margin-left: 0.5rem;
+}
+
+.carousel {
+    width: 100% !important;
+    max-height:100% !important;
+}
+.carousel-mobile {
+    width: 100% !important;
+    display: flex !important;
+    white-space: nowrap;
+    max-height: 11rem !important;
+    overflow-x: scroll;
+}
+
