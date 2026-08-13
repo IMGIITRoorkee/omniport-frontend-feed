@@ -3,7 +3,6 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
-
 import { whoami } from 'services/auth/src/actions'
 import PRoute from 'services/auth/pRoute'
 

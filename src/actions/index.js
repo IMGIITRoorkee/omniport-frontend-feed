@@ -2,7 +2,12 @@ import axios from 'axios'
 import { toast } from 'react-semantic-toasts'
 
 import { getCookie } from 'formula_one'
-import { urlFeedList, urlFeedBit } from '../urls'
+import {
+  urlFeedList,
+  urlFeedBit,
+  urlBdayList,
+  urlPersonalDetails,
+} from '../urls'
 
 export const initialiseList = () => {
   return dispatch => {
@@ -38,8 +43,6 @@ export const getMoreFeed = page => {
 
     const pageUrl = new URL(page)
     const pageNo = pageUrl.searchParams.get('page')
-
-    console.log(page, pageNo)
 
     axios
       .get(urlFeedList(), {
@@ -85,6 +88,58 @@ export const changeReport = (id, status) => {
           animation: 'fade up',
           icon: 'frown up',
           time: 3000
+        })
+      })
+  }
+}
+
+export const getBdays = day => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_BDAY_LIST_LOADED',
+      payload: false,
+    })
+    axios
+      .get(urlBdayList(day))
+      .then(res => {
+        dispatch({
+          type: 'SET_BDAY_LIST',
+          payload: {
+            isLoaded: true,
+            list: res.data,
+          },
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_BDAY_LIST_LOADED',
+          payload: true,
+        })
+      })
+  }
+}
+
+export const getPersonalDetails = () => {
+  return dispatch => {
+    dispatch({
+      type: 'SET_DETAILS_LOADED',
+      payload: false,
+    })
+    axios
+      .get(urlPersonalDetails())
+      .then(res => {
+        dispatch({
+          type: 'SET_PERSONAL_DETAILS',
+          payload: {
+            isLoaded: true,
+            details: res.data,
+          },
+        })
+      })
+      .catch(() => {
+        dispatch({
+          type: 'SET_DETAILS_LOADED',
+          payload: true,
         })
       })
   }
